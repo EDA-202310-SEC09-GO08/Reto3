@@ -54,8 +54,17 @@ def new_data_structs():
     Inicializa las estructuras de datos del modelo. Las crea de
     manera vacía para posteriormente almacenar la información.
     """
-    #TODO: Inicializar las estructuras de datos
-    pass
+    data_structs = {"siniestros": None,
+                "dateIndex": None,
+                "areaIndex": None,
+                }
+
+    data_structs["crimes"] = lt.newList("SINGLE_LINKED")
+    data_structs["dateIndex"] = om.newMap(omaptype="RBT",
+                                      comparefunction=compareDates)
+
+    return data_structs
+
 
 
 # Funciones para agregar informacion al modelo
@@ -64,8 +73,10 @@ def add_data(data_structs, data):
     """
     Función para agregar nuevos elementos a la lista
     """
-    #TODO: Crear la función para agregar elementos a una lista
-    pass
+    lt.addLast(data_structs["siniestros"], data)
+    updateDateIndex(data_structs["dateIndex"], data)
+
+    return data_structs
 
 
 # Funciones para creacion de datos
@@ -192,3 +203,27 @@ def sort(data_structs):
     """
     #TODO: Crear función de ordenamiento
     pass
+
+
+def compareIds(id1, id2):
+    """
+    Compara dos crimenes
+    """
+    if (id1 == id2):
+        return 0
+    elif id1 > id2:
+        return 1
+    else:
+        return -1
+
+
+def compareDates(date1, date2):
+    """
+    Compara dos fechas
+    """
+    if (date1 == date2):
+        return 0
+    elif (date1 > date2):
+        return 1
+    else:
+        return -1
