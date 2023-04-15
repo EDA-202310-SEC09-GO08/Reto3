@@ -40,7 +40,7 @@ from DISClib.Algorithms.Sorting import selectionsort as se
 from DISClib.Algorithms.Sorting import mergesort as merg
 from DISClib.Algorithms.Sorting import quicksort as quk
 assert cf
-
+import datetime
 """
 Se define la estructura de un catálogo de videos. El catálogo tendrá
 dos listas, una para los videos, otra para las categorias de los mismos.
@@ -56,10 +56,9 @@ def new_data_structs():
     """
     data_structs = {"siniestros": None,
                 "dateIndex": None,
-                "areaIndex": None,
                 }
 
-    data_structs["crimes"] = lt.newList("SINGLE_LINKED")
+    data_structs["siniestros"] = lt.newList("SINGLE_LINKED")
     data_structs["dateIndex"] = om.newMap(omaptype="RBT",
                                       comparefunction=compareDates)
 
@@ -81,14 +80,66 @@ def add_data(data_structs, data):
 
 # Funciones para creacion de datos
 
-def new_data(id, info):
+def new_data(formulario,cod_acc, fecha, hora,anio,mes,dia, direccion, gravedad, clase_acc, localidad,municipio,fecha_hora,latitud,longitud):
     """
     Crea una nueva estructura para modelar los datos
     """
-    #TODO: Crear la función para estructurar los datos
-    pass
+    data = {}
+    data['CODIGO_ACCIDENTE']=cod_acc
+    data['FECHA_HORA_ACC']= fecha_hora
+    data['LOCALIDAD']= localidad
+    data['DIRECCION']= direccion
+    data['GRAVEDAD']= gravedad
+    data['CLASE_ACC']= clase_acc
+    data['LATITUD']=latitud
+    data['LONGITUD']=longitud
+
+    return data
 
 
+def updateDateIndex(map, siniestro):
+    """
+    Se toma la fecha del siniestro y se busca si ya existe en el arbol
+    dicha fecha.  Si es asi, se adiciona a su lista de siniestros.
+   
+    Si no se encuentra creado un nodo para esa fecha en el arbol
+    se crea.
+    """
+    occurreddate = siniestro["FECHA_HORA_ACC"]
+    date_arbol = datetime.datetime.strptime(occurreddate, "%Y-%m-%d %H:%M:%S")
+    entry = om.get(map, date_arbol.date())
+    if entry is None:
+        datentry = newDataEntry(siniestro)
+        om.put(map, date_arbol.date(), datentry)
+    else:
+        datentry = me.getValue(entry)
+
+    ###añade el elemento al nodo
+    addDateIndex(datentry, siniestro)
+    return map
+
+def addDateIndex(datentry, siniestro):
+    """
+    Actualiza un indice de tipo de crimenes.  Este indice tiene una lista
+    de crimenes y una tabla de hash cuya llave es el tipo de crimen y
+    el valor es una lista con los crimenes de dicho tipo en la fecha que
+    se está consultando (dada por el nodo del arbol)
+    """
+    lst = datentry["lista_accidentes"]
+    lt.addLast(lst, siniestro)
+
+    return datentry
+def newDataEntry(siniestro):
+    """
+    Crea una entrada en el indice por fechas, es decir en el arbol
+    binario.
+    """
+    entry = {"fecha": None, "lista_accidentes": None}
+    entry['fecha'] = siniestro['FECHA_HORA_ACC']
+
+    entry["lista_accidentes"] = lt.newList("SINGLE_LINKED", compareDates)
+
+    return entry
 # Funciones de consulta
 
 def get_data(data_structs, id):
