@@ -40,7 +40,7 @@ from DISClib.Algorithms.Sorting import selectionsort as se
 from DISClib.Algorithms.Sorting import mergesort as merg
 from DISClib.Algorithms.Sorting import quicksort as quk
 assert cf
-import datetime
+from datetime import datetime
 """
 Se define la estructura de un catálogo de videos. El catálogo tendrá
 dos listas, una para los videos, otra para las categorias de los mismos.
@@ -58,7 +58,7 @@ def new_data_structs():
                 "dateIndex": None,
                 }
 
-    data_structs["siniestros"] = lt.newList("SINGLE_LINKED")
+    data_structs["siniestros"] = lt.newList("ARRAY_LIST")
     data_structs["dateIndex"] = om.newMap(omaptype="RBT",
                                       comparefunction=compareDates)
 
@@ -106,7 +106,7 @@ def updateDateIndex(map, siniestro):
     se crea.
     """
     occurreddate = siniestro["FECHA_HORA_ACC"]
-    date_arbol = datetime.datetime.strptime(occurreddate, "%Y-%m-%d %H:%M:%S")
+    date_arbol = datetime.strptime(occurreddate, "%Y/%m/%d %H:%M+%S")
     entry = om.get(map, date_arbol.date())
     if entry is None:
         datentry = newDataEntry(siniestro)

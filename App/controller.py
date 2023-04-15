@@ -25,7 +25,7 @@ import model
 import time
 import csv
 import tracemalloc
-
+from DISClib.ADT import list as lt
 """
 El controlador se encarga de mediar entre la vista y el modelo.
 """
@@ -55,7 +55,8 @@ def load_data(control, filename):
     for line in input_file:
         model.add_data(catalog, line)
 
-    return control
+    size = lt.size(catalog['siniestros'])
+    return control, size
 
 
 # Funciones de ordenamiento

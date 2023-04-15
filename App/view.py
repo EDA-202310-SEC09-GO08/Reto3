@@ -44,7 +44,9 @@ def new_controller():
     """
         Se crea una instancia del controlador
     """
-    #TODO: Llamar la función del controlador donde se crean las estructuras de datos
+    control =controller.new_controller()
+    return control
+
     pass
 
 
@@ -66,7 +68,8 @@ def load_data(control):
     """
     Carga los datos
     """
-    #TODO: Realizar la carga de datos
+    control =controller.load_data(control,'datos_siniestralidad-small.csv')
+    return control
     pass
 
 
@@ -157,7 +160,9 @@ if __name__ == "__main__":
         try:
             if int(inputs) == 1:
                 print("Cargando información de los archivos ....\n")
+                control = new_controller()
                 data = load_data(control)
+                print(data[1])
             elif int(inputs) == 2:
                 print_req_1(control)
 
