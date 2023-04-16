@@ -106,11 +106,12 @@ def updateDateIndex(map, siniestro):
     se crea.
     """
     occurreddate = siniestro["FECHA_HORA_ACC"]
-    date_arbol = datetime.strptime(occurreddate, "%Y/%m/%d %H:%M+%S")
-    entry = om.get(map, date_arbol.date())
+    #date_arbol = datetime.strptime(occurreddate, "%Y/%m/%d %H:%M+%S")
+    date_arbol = occurreddate.replace('/','').replace(':','').replace(' ','').replace('+','')
+    entry = om.get(map, date_arbol)
     if entry is None:
         datentry = newDataEntry(siniestro)
-        om.put(map, date_arbol.date(), datentry)
+        om.put(map, date_arbol, datentry)
     else:
         datentry = me.getValue(entry)
 
@@ -272,9 +273,9 @@ def compareDates(date1, date2):
     """
     Compara dos fechas
     """
-    if (date1 == date2):
+    if (int(date1) == int(date2)):
         return 0
-    elif (date1 > date2):
+    elif (int(date1) > int(date2)):
         return 1
     else:
         return -1
