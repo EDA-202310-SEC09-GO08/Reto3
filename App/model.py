@@ -246,12 +246,24 @@ def req_4(data_structs,fecha1,fecha2,gravedad):
     i = 1
     respuesta = lt.newList("ARRAY_LIST")
     while i<= tamanio:
+        "verificar si la gravedad que esta es la que quiero, si es asi la agrego a una lista "
         especifico = lt.getElement(lista_fechas,i)
         if especifico["GRAVEDAD"] == gravedad:
             lt.addLast(respuesta,especifico)
         i+=1
+
+    size = lt.size(respuesta)
+    "tamanio de cuantos cumplen los requisitos para imprimir"
+    final = lt.newList("ARRAY_LIST")
+    a=1
+    if size >=5:
+        "solo para imprimir los 5 "
+        while a <= 5:
+            valor = lt.getElement(respuesta,a)
+            lt.addLast(final,valor)
+            a+=1
     
-    return respuesta
+    return final,size
 
 
 

@@ -53,10 +53,10 @@ def new_controller():
 def print_menu():
     print("Bienvenido")
     print("1- Cargar información")
-    print("2- Ejecutar Requerimiento 1")
+    print("2- Reportar todos los accidentes dado un rango de fechas")
     print("3- Ejecutar Requerimiento 2")
     print("4- Ejecutar Requerimiento 3")
-    print("5- Ejecutar Requerimiento 4")
+    print("5- Reportar los 5 accidentes más recientes dada una gravedad y un rango de fechas")
     print("6- Ejecutar Requerimiento 5")
     print("7- Ejecutar Requerimiento 6")
     print("8- Ejecutar Requerimiento 7")
@@ -167,7 +167,8 @@ def print_req_4(control):
     gravedad = (input("Porfavor ingrese la gravedad en la que desea investigar "))
     respuesta = controller.req_4(control,fecha1,fecha2,gravedad)
     heads = ["CODIGO_ACCIDENTE", "DIA_OCURRENCIA_ACC", "DIRECCION","GRAVEDAD","CLASE_ACC","LOCALIDAD", "FECHA_HORA_ACC","LATITUD","LONGITUD"]
-    res = filtrar_lista_dics_por(respuesta,heads)
+    res = filtrar_lista_dics_por(respuesta[0],heads)
+    print("There are " + str(respuesta[1]) + " de gravedad " + gravedad + " between " + fecha1 + " and " + fecha2)
     print(tabulate(res, headers="keys", tablefmt= "grid", maxcolwidths=15, maxheadercolwidths=15  ))
 
 
