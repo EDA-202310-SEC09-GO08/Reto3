@@ -103,12 +103,13 @@ def req_3(control):
     pass
 
 
-def req_4(control):
+def req_4(control,fecha1,fecha2,gravedad):
     """
     Retorna el resultado del requerimiento 4
     """
     # TODO: Modificar el requerimiento 4
-    pass
+    return model.req_4(control,fecha1,fecha2,gravedad)
+
 
 
 def req_5(control):

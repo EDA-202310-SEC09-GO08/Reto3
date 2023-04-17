@@ -188,28 +188,36 @@ def devolver_value_arbol(arbol, key):
     llave_valor = om.get(map, key)
     valor = me.getValue(llave_valor)
     return valor 
-def req_1(data_structs,fecha1, fecha2):
+def organizar_rango_fechas_mas_reciente(data_structs,fecha1, fecha2):
     """
     Función que soluciona el requerimiento 1
     """
     # TODO: Realizar el requerimiento 1
     
     valor_fecha1 = fecha_hora_inicial(fecha1)
+    
     valor_fecha2 = fecha_hora_final(fecha2)
+    "se convierte la fecha dada a tipo de llave"
 
     llaves = om.values(data_structs["model"]["dateIndex"],valor_fecha1, valor_fecha2)
+    "se sacan los que esten en el rango dado"
     respuesta = lt.newList()
     tamanio = lt.size(llaves)
     i =1
     while i <= tamanio:
         pos = lt.getElement(llaves,i)
-
+        "se saca el valor acorde en la lista"
         dato = pos["lista_accidentes"]
+        "se deja solo la lista de accidentes "
 
         valor = lt.getElement(dato,1)
+        "solo tendra un dato "
         lt.addFirst(respuesta,valor)
         i+=1
 
+    return respuesta
+def req1(data_structs,fecha1, fecha2):
+    respuesta = organizar_rango_fechas_mas_reciente(data_structs,fecha1, fecha2)
     return respuesta
 
 def req_2(data_structs):
@@ -228,12 +236,24 @@ def req_3(data_structs):
     pass
 
 
-def req_4(data_structs):
+def req_4(data_structs,fecha1,fecha2,gravedad):
     """
     Función que soluciona el requerimiento 4
     """
     # TODO: Realizar el requerimiento 4
-    pass
+    lista_fechas = organizar_rango_fechas_mas_reciente(data_structs,fecha1,fecha2)
+    tamanio = lt.size(lista_fechas)
+    i = 1
+    respuesta = lt.newList("ARRAY_LIST")
+    while i<= tamanio:
+        especifico = lt.getElement(lista_fechas,i)
+        if especifico["GRAVEDAD"] == gravedad:
+            lt.addLast(respuesta,especifico)
+        i+=1
+    
+    return respuesta
+
+
 
 
 def req_5(data_structs):

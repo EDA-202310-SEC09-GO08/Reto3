@@ -162,7 +162,14 @@ def print_req_4(control):
         Función que imprime la solución del Requerimiento 4 en consola
     """
     # TODO: Imprimir el resultado del requerimiento 4
-    pass
+    fecha1 = (input("Porfavor ingrese la fecha inicial en formato YY/MM/DD "))
+    fecha2 = (input("Porfavor ingrese la fecha final en formato YY/MM/DD "))
+    gravedad = (input("Porfavor ingrese la gravedad en la que desea investigar "))
+    respuesta = controller.req_4(control,fecha1,fecha2,gravedad)
+    heads = ["CODIGO_ACCIDENTE", "DIA_OCURRENCIA_ACC", "DIRECCION","GRAVEDAD","CLASE_ACC","LOCALIDAD", "FECHA_HORA_ACC","LATITUD","LONGITUD"]
+    res = filtrar_lista_dics_por(respuesta,heads)
+    print(tabulate(res, headers="keys", tablefmt= "grid", maxcolwidths=15, maxheadercolwidths=15  ))
+
 
 
 def print_req_5(control):
