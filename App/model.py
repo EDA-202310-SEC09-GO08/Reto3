@@ -158,14 +158,59 @@ def data_size(data_structs):
     #TODO: Crear la función para obtener el tamaño de una lista
     pass
 
+def fecha_hora_inicial(fecha):
+    valor_fecha = fecha.replace('/','').replace(':','').replace(' ','').replace('+','')
+    "vuelve la fecha a la manera que se organizo el dic"
+    size = len(valor_fecha)
+    "el tamañio de ese string "
+    ideal_size = 16
+    "los que debe tener por si no se le agrega la hora o algo asi"
+    ceros = ideal_size -size
+    "cuando faltan para estar completos"
+    respuesta = valor_fecha + "0"*ceros 
+    "sumarle los ceros necesarios al valor "
+    return respuesta
 
-def req_1(data_structs):
+def fecha_hora_final(fecha):
+    valor_fecha = fecha.replace('/','').replace(':','').replace(' ','').replace('+','')
+    "vuelve la fecha a la manera que se organizo el dic"
+    size = len(valor_fecha)
+    "el tamañio de ese string "
+    ideal_size = 12
+    "los que debe tener por si no se le agrega la hora o algo asi"
+    ceros = ideal_size -size
+    "cuando faltan para estar completos"
+    respuesta = valor_fecha + "2359"+ "0"*ceros 
+    "sumarle los ceros necesarios al valor "
+    return respuesta
+
+def devolver_value_arbol(arbol, key):
+    llave_valor = om.get(map, key)
+    valor = me.getValue(llave_valor)
+    return valor 
+def req_1(data_structs,fecha1, fecha2):
     """
     Función que soluciona el requerimiento 1
     """
     # TODO: Realizar el requerimiento 1
-    pass
+    
+    valor_fecha1 = fecha_hora_inicial(fecha1)
+    valor_fecha2 = fecha_hora_final(fecha2)
 
+    llaves = om.values(data_structs["model"]["dateIndex"],valor_fecha1, valor_fecha2)
+    respuesta = lt.newList()
+    tamanio = lt.size(llaves)
+    i =1
+    while i <= tamanio:
+        pos = lt.getElement(llaves,i)
+
+        dato = pos["lista_accidentes"]
+
+        valor = lt.getElement(dato,1)
+        lt.addFirst(respuesta,valor)
+        i+=1
+
+    return respuesta
 
 def req_2(data_structs):
     """

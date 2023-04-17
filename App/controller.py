@@ -79,12 +79,12 @@ def get_data(control, id):
     pass
 
 
-def req_1(control):
+def req_1(control,fecha1, fecha2):
     """
     Retorna el resultado del requerimiento 1
     """
     # TODO: Modificar el requerimiento 1
-    pass
+    return model.req_1(control,fecha1,fecha2)
 
 
 def req_2(control):
