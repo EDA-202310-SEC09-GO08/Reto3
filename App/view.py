@@ -70,43 +70,67 @@ def new_controller():
 def print_menu():
     print("Bienvenido")
     print("1- Cargar información")
-    print("2- Ejecutar Requerimiento 1")
+    print("2- Reportar todos los accidentes dado un rango de fechas")
     print("3- Ejecutar Requerimiento 2")
     print("4- Ejecutar Requerimiento 3")
-    print("5- Ejecutar Requerimiento 4")
+    print("5- Reportar los 5 accidentes más recientes dada una gravedad y un rango de fechas")
     print("6- Ejecutar Requerimiento 5")
-    print("7- Ejecutar Requerimiento 6")
+    print("7- Mostrar los N accidentes ocurridos dentro de una zona específica para un mes y un año")
     print("8- Ejecutar Requerimiento 7")
     print("9- Ejecutar Requerimiento 8")
     print("0- Salir")
 
-def print_3_primeros_3últimos(control):
+def menu_nombre_archivo():
+    print("Que porcentage de datos ")
+    print("1-1%")
+    print("2-5%")
+    print("3-10%")
+    print("4-20%")
+    print("5-30%")
+    print("6-50%")
+    print("7-80%")
+    print("8-100%")
 
-    array_gen = control['model']['siniestros']
-    l = lt.size(array_gen)
-    i=0
-    lista_impr =[]
-    lista_impr.append(lt.getElement(array_gen,1))
-    lista_impr.append(lt.getElement(array_gen,2))
-    lista_impr.append(lt.getElement(array_gen,3))
-    lista_impr.append(lt.getElement(array_gen,l-2))
-    lista_impr.append(lt.getElement(array_gen,l-1))
-    lista_impr.append(lt.getElement(array_gen,l))
-    
-    lista_filt = filtrar_lista_dics_por_columnas(lista_impr,['CODIGO_ACCIDENTE','FECHA_HORA_ACC','LOCALIDAD','DIRECCION','GRAVEDAD','CLASE_ACC',
-                                                             'LATITUD','LONGITUD'])
-    tabulate_respuesta = tabulate(lista_filt, headers='keys', maxcolwidths =[10]*9, maxheadercolwidths=[10]*9)
-    print('Los 3 primeros y 3 últimos siniestros cargados son: ')
-    print(tabulate_respuesta)
+def menu_archivo():
+    menu_nombre_archivo()
+    porcentaje = input('Seleccione una opción para continuar\n')
+    try:
+        if int(porcentaje) == 2:
+            
+            size ='datos_siniestralidad-5pct.csv'
+            return size
+        elif int(porcentaje) == 3:
+            size = 'datos_siniestralidad-10pct.csv'
+            return size
+        elif int(porcentaje) == 4:
+            size = 'datos_siniestralidad-20pct.csv'
+            return size
+        elif int(porcentaje) == 5:
+            size = 'datos_siniestralidad-30pct.csv'
+            return size
+        elif int(porcentaje) == 6:
+            size = 'datos_siniestralidad-50pct.csv'
+            return size
+        elif int(porcentaje) == 1:
+            size = 'datos_siniestralidad-small.csv'
+            return size
+        elif int(porcentaje) == 7:
+            size = 'datos_siniestralidad-80pct.csv'
+            return size
+        elif int(porcentaje) == 8:
+            size = 'datos_siniestralidad-large.csv'
+            return size
+    except ValueError:
+            print(" una opción válida.\n")
+            traceback.print_exc()
 
-
-def load_data(control):
+def load_data(control,size):
     """
     Carga los datos
     """
-    control =controller.load_data(control,'datos_siniestralidad-small.csv')
+    control =controller.load_data(control,size)
     return control
-    pass
+    
 
 
 def print_data(control, id):
@@ -121,7 +145,17 @@ def print_req_1(control):
         Función que imprime la solución del Requerimiento 1 en consola
     """
     # TODO: Imprimir el resultado del requerimiento 1
-    pass
+    fecha1 = (input("Porfavor ingrese la fecha inicial en formato YY/MM/DD "))
+    fecha2 = (input("Porfavor ingrese la fecha final en formato YY/MM/DD "))
+    respuesta =  controller.req_1(control,fecha1,fecha2)
+    size = lt.size(respuesta)
+    print( " There are " + str(size) + " between " + fecha1 + " and " + fecha2)
+   
+    heads = ["CODIGO_ACCIDENTE", "DIA_OCURRENCIA_ACC", "DIRECCION","GRAVEDAD","CLASE_ACC","LOCALIDAD", "FECHA_HORA_ACC","LATITUD","LONGITUD"]
+    res = filtrar_lista_dics_por(respuesta,heads)
+    print(tabulate(res, headers="keys", tablefmt= "grid", maxcolwidths=15, maxheadercolwidths=15  ))
+
+    
 
 
 def print_req_2(control):
@@ -145,7 +179,15 @@ def print_req_4(control):
         Función que imprime la solución del Requerimiento 4 en consola
     """
     # TODO: Imprimir el resultado del requerimiento 4
-    pass
+    fecha1 = (input("Porfavor ingrese la fecha inicial en formato YY/MM/DD "))
+    fecha2 = (input("Porfavor ingrese la fecha final en formato YY/MM/DD "))
+    gravedad = (input("Porfavor ingrese la gravedad en la que desea investigar "))
+    respuesta = controller.req_4(control,fecha1,fecha2,gravedad)
+    heads = ["CODIGO_ACCIDENTE", "DIA_OCURRENCIA_ACC", "DIRECCION","GRAVEDAD","CLASE_ACC","LOCALIDAD", "FECHA_HORA_ACC","LATITUD","LONGITUD"]
+    res = filtrar_lista_dics_por(respuesta[0],heads)
+    print("There are " + str(respuesta[1]) + " de gravedad " + gravedad + " between " + fecha1 + " and " + fecha2)
+    print(tabulate(res, headers="keys", tablefmt= "grid", maxcolwidths=15, maxheadercolwidths=15  ))
+
 
 
 def print_req_5(control):
@@ -161,7 +203,17 @@ def print_req_6(control):
         Función que imprime la solución del Requerimiento 6 en consola
     """
     # TODO: Imprimir el resultado del requerimiento 6
-    pass
+    anio = input("Ingrese el año en el que desea buscar la informacion ")
+    mes = input("Ingrese el mes en el que desea buscar la informacion en formato de numero, ej:08 ")
+    latitud = input("Ingrese la latitud en la que quiere buscar informacion cerca ")
+    longitud = input("Ingrese la longitud  en la que quiere buscar informacion cerca ")
+    radio = input("Ingrese el radio en el que desea buscar los accidentes en kilometros ")
+    n_accidentes = input("Ingrese el numero de accidentes que desea investigar ")
+    respuesta = controller.req_6(control, anio, mes, latitud, longitud,radio,n_accidentes)
+    heads = ["CODIGO_ACCIDENTE", "DIA_OCURRENCIA_ACC", "DIRECCION","GRAVEDAD","CLASE_ACC","LOCALIDAD", "FECHA_HORA_ACC","LATITUD","LONGITUD"]
+    res = filtrar_lista_dics_por(respuesta,heads)
+    print("The " + n_accidentes + " closer to the point (" + latitud + "," + longitud + ") in a radio of " + radio + " for the year " + anio + " in the month " + mes)
+    print(tabulate(res, headers="keys", tablefmt= "grid", maxcolwidths=15, maxheadercolwidths=15  ))
 
 
 def print_req_7(control):
@@ -179,6 +231,26 @@ def print_req_8(control):
     # TODO: Imprimir el resultado del requerimiento 8
     pass
 
+def filtrar_lista_dics_por(lista_dics,lista_columnas):
+    
+    lista_filt = []
+
+    tamanio_lista = lt.size(lista_dics)
+    i = 1
+
+    while i<=tamanio_lista:
+        a = lt.getElement(lista_dics,i)
+        dic_filt_dado = filtrar_dic_con_por_llaves(a,lista_columnas)
+        lista_filt.append(dic_filt_dado)
+        i+=1
+    return lista_filt
+
+def filtrar_dic_con_por_llaves(dic, lista_de_columnas_aMostrar):
+    dic_filt ={}
+    for llave in lista_de_columnas_aMostrar:
+        dic_filt[llave]=dic[llave]
+
+    return dic_filt
 
 # Se crea el controlador asociado a la vista
 control = new_controller()
@@ -196,10 +268,12 @@ if __name__ == "__main__":
         try:
             if int(inputs) == 1:
                 print("Cargando información de los archivos ....\n")
+                size = menu_archivo()
                 control = new_controller()
-                data = load_data(control)
+                data = load_data(control,size)
                 print(data[1])
             elif int(inputs) == 2:
+
                 print_req_1(control)
 
             elif int(inputs) == 3:
