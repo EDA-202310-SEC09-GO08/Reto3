@@ -38,7 +38,24 @@ Presenta el menu de opciones y por cada seleccion
 se hace la solicitud al controlador para ejecutar la
 operación solicitada
 """
+def filtrar_dic_con_por_llaves(dic, lista_de_columnas_aMostrar):
+    dic_filt ={}
+    for llave in lista_de_columnas_aMostrar:
+        dic_filt[llave]=dic[llave]
 
+    return dic_filt
+
+def filtrar_lista_dics_por_columnas(lista_dics,lista_columnas):
+    lista_filt = []
+    
+    tamanio_lista = len(lista_dics)
+    i = 0
+    
+    while i<tamanio_lista:
+        dic_filt_dado = filtrar_dic_con_por_llaves(lista_dics[i],lista_columnas)
+        lista_filt.append(dic_filt_dado)
+        i+=1
+    return lista_filt
 
 def new_controller():
     """
@@ -62,6 +79,25 @@ def print_menu():
     print("8- Ejecutar Requerimiento 7")
     print("9- Ejecutar Requerimiento 8")
     print("0- Salir")
+
+def print_3_primeros_3últimos(control):
+
+    array_gen = control['model']['siniestros']
+    l = lt.size(array_gen)
+    i=0
+    lista_impr =[]
+    lista_impr.append(lt.getElement(array_gen,1))
+    lista_impr.append(lt.getElement(array_gen,2))
+    lista_impr.append(lt.getElement(array_gen,3))
+    lista_impr.append(lt.getElement(array_gen,l-2))
+    lista_impr.append(lt.getElement(array_gen,l-1))
+    lista_impr.append(lt.getElement(array_gen,l))
+    
+    lista_filt = filtrar_lista_dics_por_columnas(lista_impr,['CODIGO_ACCIDENTE','FECHA_HORA_ACC','LOCALIDAD','DIRECCION','GRAVEDAD','CLASE_ACC',
+                                                             'LATITUD','LONGITUD'])
+    tabulate_respuesta = tabulate(lista_filt, headers='keys', maxcolwidths =[10]*9, maxheadercolwidths=[10]*9)
+    print('Los 3 primeros y 3 últimos siniestros cargados son: ')
+    print(tabulate_respuesta)
 
 
 def load_data(control):
