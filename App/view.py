@@ -124,6 +124,25 @@ def menu_archivo():
             print(" una opción válida.\n")
             traceback.print_exc()
 
+def print_3_primeros_3últimos(control):
+
+    array_gen = control['model']['siniestros']
+    l = lt.size(array_gen)
+    i=0
+    lista_impr =[]
+    lista_impr.append(lt.getElement(array_gen,1))
+    lista_impr.append(lt.getElement(array_gen,2))
+    lista_impr.append(lt.getElement(array_gen,3))
+    lista_impr.append(lt.getElement(array_gen,l-2))
+    lista_impr.append(lt.getElement(array_gen,l-1))
+    lista_impr.append(lt.getElement(array_gen,l))
+    
+    lista_filt = filtrar_lista_dics_por_columnas(lista_impr,['CODIGO_ACCIDENTE','FECHA_HORA_ACC','LOCALIDAD','DIRECCION','GRAVEDAD','CLASE_ACC',
+                                                             'LATITUD','LONGITUD'])
+    tabulate_respuesta = tabulate(lista_filt, headers='keys', maxcolwidths =[10]*9, maxheadercolwidths=[10]*9)
+    print('Los 3 primeros y 3 últimos siniestros cargados son: ')
+    print(tabulate_respuesta)
+
 def load_data(control,size):
     """
     Carga los datos
