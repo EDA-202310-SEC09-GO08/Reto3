@@ -58,7 +58,7 @@ def print_menu():
     print("4- Ejecutar Requerimiento 3")
     print("5- Reportar los 5 accidentes más recientes dada una gravedad y un rango de fechas")
     print("6- Ejecutar Requerimiento 5")
-    print("7- Ejecutar Requerimiento 6")
+    print("7- Mostrar los N accidentes ocurridos dentro de una zona específica para un mes y un año")
     print("8- Ejecutar Requerimiento 7")
     print("9- Ejecutar Requerimiento 8")
     print("0- Salir")
@@ -186,7 +186,17 @@ def print_req_6(control):
         Función que imprime la solución del Requerimiento 6 en consola
     """
     # TODO: Imprimir el resultado del requerimiento 6
-    pass
+    anio = input("Ingrese el año en el que desea buscar la informacion ")
+    mes = input("Ingrese el mes en el que desea buscar la informacion en formato de numero, ej:08 ")
+    latitud = input("Ingrese la latitud en la que quiere buscar informacion cerca ")
+    longitud = input("Ingrese la longitud  en la que quiere buscar informacion cerca ")
+    radio = input("Ingrese el radio en el que desea buscar los accidentes en kilometros ")
+    n_accidentes = input("Ingrese el numero de accidentes que desea investigar ")
+    respuesta = controller.req_6(control, anio, mes, latitud, longitud,radio,n_accidentes)
+    heads = ["CODIGO_ACCIDENTE", "DIA_OCURRENCIA_ACC", "DIRECCION","GRAVEDAD","CLASE_ACC","LOCALIDAD", "FECHA_HORA_ACC","LATITUD","LONGITUD"]
+    res = filtrar_lista_dics_por(respuesta,heads)
+    print("The " + n_accidentes + " closer to the point (" + latitud + "," + longitud + ") in a radio of " + radio + " for the year " + anio + " in the month " + mes)
+    print(tabulate(res, headers="keys", tablefmt= "grid", maxcolwidths=15, maxheadercolwidths=15  ))
 
 
 def print_req_7(control):

@@ -41,6 +41,7 @@ from DISClib.Algorithms.Sorting import mergesort as merg
 from DISClib.Algorithms.Sorting import quicksort as quk
 assert cf
 from datetime import datetime
+import math 
 """
 Se define la estructura de un catálogo de videos. El catálogo tendrá
 dos listas, una para los videos, otra para las categorias de los mismos.
@@ -262,8 +263,11 @@ def req_4(data_structs,fecha1,fecha2,gravedad):
             valor = lt.getElement(respuesta,a)
             lt.addLast(final,valor)
             a+=1
+        return final,size
+    else:
+        return respuesta, size
     
-    return final,size
+    
 
 
 
@@ -273,15 +277,69 @@ def req_5(data_structs):
     Función que soluciona el requerimiento 5
     """
     # TODO: Realizar el requerimiento 5
+    
     pass
 
+def funcion_distancias_lat_long(latitud1,longitud1,latitud2,longitud2):
+    r = 6371
+    c = math.pi/180
+    d =r*2*math.asin(math.sqrt(math.sin(c*(latitud1-latitud2)/2)**2 + math.cos(c*latitud1) * math.cos(c*latitud2)*math.sin(c*(longitud1-longitud2)/2)**2))
 
-def req_6(data_structs):
+    return d
+
+def req_6(data_structs,anio,mes,latitud,longitud,radio,n_actividades):
     """
     Función que soluciona el requerimiento 6
     """
     # TODO: Realizar el requerimiento 6
-    pass
+    codificacion = anio + mes + "0"*10
+    if mes == "12":
+        anio = int(anio) + 1
+        mes = int(mes) - 11
+        codificacion_siguiente_mes = str(anio) +"0" + str(mes) + "0"*10
+        "calculo el siguiente mes dependiendo si es diciembre "
+    
+    else:
+        mes = int(mes) + 1
+        codificacion_siguiente_mes = str(anio) + "0" + str(mes) + "0"*10
+        "el valor que se le dara al mes indicado "
+
+    lista_intervalo_valores = om.values(data_structs["model"]["dateIndex"],codificacion,codificacion_siguiente_mes)
+    "lista del intervalo "
+
+    tamanio = lt.size(lista_intervalo_valores)
+    i = 1
+    heap = impq.newIndexMinPQ(cmpfunction=compareradio)
+    "no se que colocar para el heap "
+    while i <=tamanio:
+        exacto = lt.getElement(lista_intervalo_valores,i)
+        pos = lt.getElement(exacto["lista_accidentes"],1)
+        distancia = funcion_distancias_lat_long(float(latitud), float(longitud), float(pos["LATITUD"]), float(pos["LONGITUD"]))
+        "se saca la distancia en la que esta "
+        if distancia <= int(radio):
+            impq.insert(heap,distancia,exacto)
+            "si es verdad se agrega a un heap "
+        i+=1
+
+    "me falta hacerle un sort al de arriba, para que el heap este organizado "
+
+    respuesta = lt.newList()
+    a = 1
+    while a <= n_actividades:
+        "voy agregando poco a poco a una nueva lista para que al final solo muestre las que deseo "
+        min = mpq.min(heap)
+        lt.addLast(respuesta,min)
+        "no se si add last o first, depende de como quede despues del sort "
+        mpq.delMin(heap)
+        a +=1 
+    
+    return respuesta 
+
+
+
+
+
+
 
 
 def req_7(data_structs):
@@ -353,6 +411,17 @@ def compareDates(date1, date2):
     if (int(date1) == int(date2)):
         return 0
     elif (int(date1) > int(date2)):
+        return 1
+    else:
+        return -1
+    
+def compareradio(radio1, radio2):
+    """
+    Compara dos fechas
+    """
+    if (int(radio1) == int(radio2)):
+        return 0
+    elif (int(radio1) > int(radio2)):
         return 1
     else:
         return -1

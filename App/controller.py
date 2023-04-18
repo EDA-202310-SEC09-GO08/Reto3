@@ -84,7 +84,7 @@ def req_1(control,fecha1, fecha2):
     Retorna el resultado del requerimiento 1
     """
     # TODO: Modificar el requerimiento 1
-    return model.req_1(control,fecha1,fecha2)
+    return model.req1(control,fecha1,fecha2)
 
 
 def req_2(control):
@@ -119,12 +119,12 @@ def req_5(control):
     # TODO: Modificar el requerimiento 5
     pass
 
-def req_6(control):
+def req_6(control,anio,mes,latitud,longitud,radio,n_actividades):
     """
     Retorna el resultado del requerimiento 6
     """
     # TODO: Modificar el requerimiento 6
-    pass
+    return model.req_6(control,anio,mes,latitud,longitud,radio,n_actividades)
 
 
 def req_7(control):
