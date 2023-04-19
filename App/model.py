@@ -321,9 +321,10 @@ def req_6(data_structs,anio,mes,latitud,longitud,radio,n_actividades):
             mpq.insert(heap,distancia)
             mp.put(mapa,distancia,pos)
             "si es verdad se agrega a un heap "
+            "Mapa con llave la distancia y respuesta lo que quiero dar "
         i+=1
 
-    "me falta hacerle un sort al de arriba, para que el heap este organizado "
+    
 
     respuesta = lt.newList()
     a = 1
@@ -332,7 +333,7 @@ def req_6(data_structs,anio,mes,latitud,longitud,radio,n_actividades):
         min = mpq.min(heap)
         dic = devolver_value(mapa,min)
         lt.addLast(respuesta,dic)
-        "no se si add last o first, depende de como quede despues del sort "
+        
         mpq.delMin(heap)
         a +=1 
     
