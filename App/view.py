@@ -231,7 +231,7 @@ def print_req_6(control):
     respuesta = controller.req_6(control, anio, mes, latitud, longitud,radio,n_accidentes)
     heads = ["CODIGO_ACCIDENTE", "DIA_OCURRENCIA_ACC", "DIRECCION","GRAVEDAD","CLASE_ACC","LOCALIDAD", "FECHA_HORA_ACC","LATITUD","LONGITUD"]
     res = filtrar_lista_dics_por(respuesta,heads)
-    print("The " + n_accidentes + " closer to the point (" + latitud + "," + longitud + ") in a radio of " + radio + " for the year " + anio + " in the month " + mes)
+    print("The " + n_accidentes + " closer to the point (" + latitud + "," + longitud + ") in a radio of " + radio + " km for the year " + anio + " in the month " + mes + "are")
     print(tabulate(res, headers="keys", tablefmt= "grid", maxcolwidths=15, maxheadercolwidths=15  ))
 
 

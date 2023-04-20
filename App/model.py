@@ -185,8 +185,8 @@ def fecha_hora_final(fecha):
     "sumarle los ceros necesarios al valor "
     return respuesta
 
-def devolver_value_arbol(arbol, key):
-    llave_valor = om.get(map, key)
+def devolver_value(mapa, key):
+    llave_valor = mp.get(mapa, key)
     valor = me.getValue(llave_valor)
     return valor 
 def organizar_rango_fechas_mas_reciente(data_structs,fecha1, fecha2):
@@ -309,7 +309,8 @@ def req_6(data_structs,anio,mes,latitud,longitud,radio,n_actividades):
 
     tamanio = lt.size(lista_intervalo_valores)
     i = 1
-    heap = impq.newIndexMinPQ(cmpfunction=compareradio)
+    heap = mpq.newMinPQ(cmpfunction=compareradio)
+    mapa = mp.newMap()
     "no se que colocar para el heap "
     while i <=tamanio:
         exacto = lt.getElement(lista_intervalo_valores,i)
@@ -317,19 +318,22 @@ def req_6(data_structs,anio,mes,latitud,longitud,radio,n_actividades):
         distancia = funcion_distancias_lat_long(float(latitud), float(longitud), float(pos["LATITUD"]), float(pos["LONGITUD"]))
         "se saca la distancia en la que esta "
         if distancia <= int(radio):
-            impq.insert(heap,distancia,exacto)
+            mpq.insert(heap,distancia)
+            mp.put(mapa,distancia,pos)
             "si es verdad se agrega a un heap "
+            "Mapa con llave la distancia y respuesta lo que quiero dar "
         i+=1
 
-    "me falta hacerle un sort al de arriba, para que el heap este organizado "
+    
 
     respuesta = lt.newList()
     a = 1
-    while a <= n_actividades:
+    while a <= int(n_actividades):
         "voy agregando poco a poco a una nueva lista para que al final solo muestre las que deseo "
         min = mpq.min(heap)
-        lt.addLast(respuesta,min)
-        "no se si add last o first, depende de como quede despues del sort "
+        dic = devolver_value(mapa,min)
+        lt.addLast(respuesta,dic)
+        
         mpq.delMin(heap)
         a +=1 
     
@@ -419,9 +423,8 @@ def compareradio(radio1, radio2):
     """
     Compara dos fechas
     """
-    if (int(radio1) == int(radio2)):
-        return 0
-    elif (int(radio1) > int(radio2)):
-        return 1
+    
+    if (int(radio1) > int(radio2)):
+        return True
     else:
-        return -1
+        return False
