@@ -224,7 +224,7 @@ def print_req_5(control):
     print('Los 10 accidentes mas recientes para la fecha dada son: ')
     print(tabulate_respuesta)
 
-
+#
 def print_req_6(control):
     """
         Función que imprime la solución del Requerimiento 6 en consola
