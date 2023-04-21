@@ -314,7 +314,21 @@ def values(map, keylo, keyhi):
     """
     return map['datastructure'].values(map, keylo, keyhi)
 
+def values_array(map, keylo, keyhi):
+    """
+    Retorna todas los valores del arbol que se encuentren entre
+    [keylo, keyhi]
 
+    Args:
+        map: La tabla de simbolos
+        keylo: limite inferior
+        keylohi: limite superiorr
+    Returns:
+        Las llaves en el rago especificado
+    Raises:
+        Exception
+    """
+    return map['datastructure'].values_array(map, keylo, keyhi)
 """
 Selector dinamico de la estructua de datos solicitada
 """

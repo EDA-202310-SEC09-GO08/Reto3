@@ -423,6 +423,28 @@ def values(bst, keylo, keyhi):
     except Exception as exp:
         error.reraise(exp, 'BST:Values')
 
+
+def values_array(bst, keylo, keyhi):
+    """
+    Retorna todas los valores del arbol que se encuentren entre
+    [keylo, keyhi]
+
+    Args:
+        bst: La tabla de simbolos
+        keylo: limite inferior
+        keylohi: limite superiorr
+    Returns:
+        Las llaves en el rago especificado
+    Raises:
+        Exception
+    """
+    try:
+        lstvalues = lt.newList('ARRAY_LIST', bst['cmpfunction'])
+        lstvalues = valuesRange(bst['root'], keylo, keyhi, lstvalues,
+                                bst['cmpfunction'])
+        return lstvalues
+    except Exception as exp:
+        error.reraise(exp, 'BST:Values')
 # _____________________________________________________________________
 #            Funciones Helper
 # _____________________________________________________________________
