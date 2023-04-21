@@ -210,11 +210,19 @@ def print_req_4(control):
 
 
 def print_req_5(control):
-    """
-        Función que imprime la solución del Requerimiento 5 en consola
-    """
-    # TODO: Imprimir el resultado del requerimiento 5
-    pass
+
+    anio =(input('Ingrese año: '))
+    mes = (input ('Ingrese mes en formato númerico ej 03 para marzo'))
+    localidad =(input('ingrese localidad en MAYUSCULAS SIN TILDES: '))
+
+    respuesta = controller.req_5(control,anio,mes,localidad)
+
+    #print(respuesta)
+    lista_filt = filtrar_lista_dics_por_columnas(respuesta,["CODIGO_ACCIDENTE", "DIA_OCURRENCIA_ACC", "DIRECCION","GRAVEDAD","CLASE_ACC","LOCALIDAD", "FECHA_HORA_ACC","LATITUD","LONGITUD"])
+
+    tabulate_respuesta = tabulate(lista_filt, headers='keys', maxcolwidths =[10]*9, maxheadercolwidths=[10]*9)
+    print('Los 10 accidentes mas recientes para la fecha dada son: ')
+    print(tabulate_respuesta)
 
 
 def print_req_6(control):

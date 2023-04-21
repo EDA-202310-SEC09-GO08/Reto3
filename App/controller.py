@@ -112,12 +112,14 @@ def req_4(control,fecha1,fecha2,gravedad):
 
 
 
-def req_5(control):
+def req_5(control,anio,mes,localidad):
+
+    
     """
     Retorna el resultado del requerimiento 5
     """
     # TODO: Modificar el requerimiento 5
-    pass
+    return model.req_5(control['model'],anio,mes,localidad)
 
 def req_6(control,anio,mes,latitud,longitud,radio,n_actividades):
     """
