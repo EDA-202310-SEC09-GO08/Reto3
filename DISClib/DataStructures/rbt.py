@@ -453,6 +453,27 @@ def values(rbt, keylo, keyhi):
     except Exception as exp:
         error.reraise(exp, 'RBT:Values')
 
+def values_array(rbt, keylo, keyhi):
+    """
+    Retorna todas los valores del arbol que se encuentren entre
+    [keylo, keyhi]
+
+    Args:
+        bst: La tabla de simbolos
+        keylo: limite inferior
+        keylohi: limite superiorr
+    Returns:
+        Las llaves en el rago especificado
+    Raises:
+        Exception
+    """
+    try:
+        lstvalues = lt.newList('ARRAY_LIST', rbt['cmpfunction'])
+        lstvalues = valuesRange(rbt['root'], keylo, keyhi, lstvalues,
+                                rbt['cmpfunction'])
+        return lstvalues
+    except Exception as exp:
+        error.reraise(exp, 'RBT:Values')
 
 # _____________________________________________________________________________
 #       Funciones Helper

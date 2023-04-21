@@ -292,9 +292,9 @@ if __name__ == "__main__":
                 data = load_data(control,size)
                 print(data[1])
                 print_3_primeros_3últimos(control)
-                #arbol = control['model']['dateIndex']
-                #rango = om.keys(arbol,202204*10**10,202205*10**10)
-                #print(rango)
+                arbol = control['model']['dateIndex']
+                rango = om.values_array(arbol,202204*10**10,202205*10**10)
+                print(rango)
                 #min = om.minKey(arbol)
                 print(min)
             elif int(inputs) == 2:
