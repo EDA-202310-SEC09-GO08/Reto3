@@ -375,7 +375,7 @@ def req_6(data_structs,anio,mes,latitud,longitud,radio,n_actividades):
 
     
 
-    respuesta = lt.newList()
+    respuesta = lt.newList("ARRAY_LIST")
     a = 1
     while a <= int(n_actividades):
         "voy agregando poco a poco a una nueva lista para que al final solo muestre las que deseo "

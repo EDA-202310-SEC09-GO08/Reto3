@@ -84,7 +84,11 @@ def req_1(control,fecha1, fecha2):
     Retorna el resultado del requerimiento 1
     """
     # TODO: Modificar el requerimiento 1
-    return model.req1(control,fecha1,fecha2)
+    tiempo_i = get_time()
+    respuesta = model.req1(control,fecha1,fecha2)
+    tiempo_f = get_time()
+    delta_t = delta_time(tiempo_i, tiempo_f)
+    return respuesta, delta_t
 
 
 def req_2(control):
@@ -108,7 +112,11 @@ def req_4(control,fecha1,fecha2,gravedad):
     Retorna el resultado del requerimiento 4
     """
     # TODO: Modificar el requerimiento 4
-    return model.req_4(control,fecha1,fecha2,gravedad)
+    tiempo_i = get_time()
+    respuesta =model.req_4(control,fecha1,fecha2,gravedad)
+    tiempo_f = get_time()
+    delta_t = delta_time(tiempo_i, tiempo_f)
+    return respuesta, delta_t
 
 
 
@@ -126,7 +134,11 @@ def req_6(control,anio,mes,latitud,longitud,radio,n_actividades):
     Retorna el resultado del requerimiento 6
     """
     # TODO: Modificar el requerimiento 6
-    return model.req_6(control,anio,mes,latitud,longitud,radio,n_actividades)
+    tiempo_i = get_time()
+    respuesta = model.req_6(control,anio,mes,latitud,longitud,radio,n_actividades)
+    tiempo_f = get_time()
+    delta_t = delta_time(tiempo_i, tiempo_f)
+    return respuesta,delta_t
 
 
 def req_7(control):
