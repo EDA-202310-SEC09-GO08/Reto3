@@ -254,6 +254,22 @@ def print_req_7(control):
     pass
 
 
+def req_72(control,anio,mes):
+    respuesta_dic = controller.req7_2(control,anio,mes)
+
+    lista_x = list(respuesta_dic)
+
+    ## crea lista y
+    lista_y =[]
+
+    i = 0
+    while i<24:
+        lista_y.append(respuesta_dic[i])
+        i+=1
+
+    
+    
+
 def print_req_8(control):
     """
         Función que imprime la solución del Requerimiento 8 en consola

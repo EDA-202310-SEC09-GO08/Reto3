@@ -148,7 +148,10 @@ def req_7(control):
     # TODO: Modificar el requerimiento 7
     pass
 
-
+def req7_2(control,anio,mes):
+    data_structs = control['model']
+    respuesta = model.data_frame_accidentes_por_hora(data_structs,anio,mes)
+    return respuesta
 def req_8(control):
     """
     Retorna el resultado del requerimiento 8
