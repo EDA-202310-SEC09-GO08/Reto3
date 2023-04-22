@@ -167,12 +167,13 @@ def print_req_1(control):
     fecha1 = (input("Porfavor ingrese la fecha inicial en formato YY/MM/DD "))
     fecha2 = (input("Porfavor ingrese la fecha final en formato YY/MM/DD "))
     respuesta =  controller.req_1(control,fecha1,fecha2)
-    size = lt.size(respuesta)
+    size = lt.size(respuesta[0])
     print( " There are " + str(size) + " between " + fecha1 + " and " + fecha2)
    
     heads = ["CODIGO_ACCIDENTE", "DIA_OCURRENCIA_ACC", "DIRECCION","GRAVEDAD","CLASE_ACC","LOCALIDAD", "FECHA_HORA_ACC","LATITUD","LONGITUD"]
-    res = filtrar_lista_dics_por(respuesta,heads)
+    res = filtrar_lista_dics_por(respuesta[0],heads)
     print(tabulate(res, headers="keys", tablefmt= "grid", maxcolwidths=15, maxheadercolwidths=15  ))
+    print("el tiempo " + str(respuesta[1]))
 
     
 
@@ -203,9 +204,10 @@ def print_req_4(control):
     gravedad = (input("Porfavor ingrese la gravedad en la que desea investigar "))
     respuesta = controller.req_4(control,fecha1,fecha2,gravedad)
     heads = ["CODIGO_ACCIDENTE", "DIA_OCURRENCIA_ACC", "DIRECCION","GRAVEDAD","CLASE_ACC","LOCALIDAD", "FECHA_HORA_ACC","LATITUD","LONGITUD"]
-    res = filtrar_lista_dics_por(respuesta[0],heads)
-    print("There are " + str(respuesta[1]) + " de gravedad " + gravedad + " between " + fecha1 + " and " + fecha2)
+    res = filtrar_lista_dics_por(respuesta[0][0],heads)
+    print("There are " + str(respuesta[0][1]) + " de gravedad " + gravedad + " between " + fecha1 + " and " + fecha2)
     print(tabulate(res, headers="keys", tablefmt= "grid", maxcolwidths=15, maxheadercolwidths=15  ))
+    print("el tiempo " + str(respuesta[1]))
 
 
 
@@ -230,9 +232,10 @@ def print_req_6(control):
     n_accidentes = input("Ingrese el numero de accidentes que desea investigar ")
     respuesta = controller.req_6(control, anio, mes, latitud, longitud,radio,n_accidentes)
     heads = ["CODIGO_ACCIDENTE", "DIA_OCURRENCIA_ACC", "DIRECCION","GRAVEDAD","CLASE_ACC","LOCALIDAD", "FECHA_HORA_ACC","LATITUD","LONGITUD"]
-    res = filtrar_lista_dics_por(respuesta,heads)
+    res = filtrar_lista_dics_por(respuesta[0],heads)
     print("The " + n_accidentes + " closer to the point (" + latitud + "," + longitud + ") in a radio of " + radio + " km for the year " + anio + " in the month " + mes + "are")
     print(tabulate(res, headers="keys", tablefmt= "grid", maxcolwidths=15, maxheadercolwidths=15  ))
+    print("el tiempo " + str(respuesta[1]))
 
 
 def print_req_7(control):
