@@ -392,7 +392,20 @@ def req_6(data_structs,anio,mes,latitud,longitud,radio,n_actividades):
 
 
 
+#### Funciones req 7
 
+
+#Crea map con llave hora y valor numero de accidentes
+def data_frame_accidentes_por_hora(data_structs,anio,mes):
+
+    arbol_fechas = data_structs['dateIndex']
+
+    lim_inf = int(anio+mes)*10**10
+    lim_sup = (int(anio+mes)+1)*10**10
+    
+
+    ##rango en single_linked
+    rango_siniestros = om.values_array(arbol_fechas,lim_inf,lim_sup)
 
 
 def req_7(data_structs):
