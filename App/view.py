@@ -252,6 +252,11 @@ def print_req_7(control):
     """
         Función que imprime la solución del Requerimiento 7 en consola
     """
+    anio =input('ingrese año: ')
+
+    mes = input('ingrese mes: ')
+    req_72(control,anio,mes)
+    # TODO: Manuel, llama aca la función que hagas qye liste los primeros y últimos accidentes por dia
     # TODO: Imprimir el resultado del requerimiento 7
     pass
 
@@ -322,13 +327,13 @@ if __name__ == "__main__":
                 size = menu_archivo()
                 control = new_controller()
                 data = load_data(control,size)
-                print(data[1])
+                #print(data[1])
                 print_3_primeros_3últimos(control)
-                arbol = control['model']['dateIndex']
-                rango = om.values_array(arbol,202204*10**10,202205*10**10)
-                print(rango)
+                #arbol = control['model']['dateIndex']
+                #rango = om.values_array(arbol,202204*10**10,202205*10**10)
+                #print(rango)
                 #min = om.minKey(arbol)
-                print(min)
+                #print(min)
             elif int(inputs) == 2:
 
                 print_req_1(control)

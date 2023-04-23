@@ -407,6 +407,7 @@ def data_frame_accidentes_por_hora(data_structs,anio,mes):
     ##rango en single_linked
     rango_siniestros = om.values_array(arbol_fechas,lim_inf,lim_sup)
 
+    #print(rango_siniestros)
     #crear dic
     dic_horas={}
 
@@ -414,11 +415,18 @@ def data_frame_accidentes_por_hora(data_structs,anio,mes):
     while i<24:
         dic_horas[i]=0
         i+=1
+    rango_siniestros_iterable = lt.iterator(rango_siniestros)
+    for entry in rango_siniestros_iterable:
+        lista_accidentes = entry['lista_accidentes']
 
-    for accidente in rango_siniestros:
-        hora_acc = int(accidente['HORA_OCURRENCIA_ACC'].split(':')[0])
+        lista_acc_iterable = lt.iterator(lista_accidentes)
 
-        dic_horas[hora_acc]+=1
+        for accidente in lista_acc_iterable:
+            print(accidente)
+            hora_acc = int(accidente['HORA_OCURRENCIA_ACC'].split(':')[0])
+            #print(hora_acc)
+
+            dic_horas[hora_acc]+=1
     
     return dic_horas
 
