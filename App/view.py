@@ -266,7 +266,14 @@ def req_72(control,anio,mes):
 
     lista_x = list(respuesta_dic)
 
+    i = 0
+
+    while i<24:
+        num = lista_x[i]
+        lista_x[i]=str(num)
+        i+=1
     ## crea lista y
+    print(type(lista_x[0]))
     lista_y =[]
 
     i = 0
