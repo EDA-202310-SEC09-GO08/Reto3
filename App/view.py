@@ -32,6 +32,8 @@ assert cf
 from tabulate import tabulate
 import traceback
 from DISClib.ADT import orderedmap as om
+
+import matplotlib.pyplot as plt
 """
 La vista se encarga de la interacción con el usuario
 Presenta el menu de opciones y por cada seleccion
@@ -266,9 +268,12 @@ def req_72(control,anio,mes):
     while i<24:
         lista_y.append(respuesta_dic[i])
         i+=1
+    plt.bar(lista_x,lista_y)
+    plt.title('Estadística de accidentes ocurridos en el mes dado por hora')
+    plt.xlabel('Hora')
+    plt.ylabel('Frecuencia')
 
-    
-    
+    plt.show()
 
 def print_req_8(control):
     """
