@@ -273,7 +273,7 @@ def req_72(control,anio,mes):
         lista_x[i]=str(num)
         i+=1
     ## crea lista y
-    print(type(lista_x[0]))
+    #print(type(lista_x[0]))
     lista_y =[]
 
     i = 0
