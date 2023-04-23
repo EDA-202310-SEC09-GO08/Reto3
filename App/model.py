@@ -422,7 +422,7 @@ def data_frame_accidentes_por_hora(data_structs,anio,mes):
         lista_acc_iterable = lt.iterator(lista_accidentes)
 
         for accidente in lista_acc_iterable:
-            print(accidente)
+            #print(accidente)
             hora_acc = int(accidente['HORA_OCURRENCIA_ACC'].split(':')[0])
             #print(hora_acc)
 
