@@ -91,20 +91,27 @@ def req_1(control,fecha1, fecha2):
     return respuesta, delta_t
 
 
-def req_2(control):
+def req_2(control , anio , mes , hora_1, hora_2 ):
     """
     Retorna el resultado del requerimiento 2
     """
     # TODO: Modificar el requerimiento 2
-    pass
+    tiempo_i = get_time()
+    respuesta = model.req_2(control , anio, mes, hora_1, hora_2)
+    tiempo_f = get_time()
+    delta_t =delta_time(tiempo_i ,tiempo_f)
+    return respuesta, delta_t
 
 
-def req_3(control):
+def req_3(control, clase, calle):
     """
     Retorna el resultado del requerimiento 3
     """
-    # TODO: Modificar el requerimiento 3
-    pass
+    tiempo_i = get_time()
+    respuesta = model.req_3(control , clase , calle)
+    tiempo_f = get_time()
+    delta_t =delta_time(tiempo_i ,tiempo_f)
+    return respuesta, delta_t
 
 
 def req_4(control,fecha1,fecha2,gravedad):
@@ -133,6 +140,7 @@ def req_5(control,anio,mes,localidad):
     delta_t = delta_time(tiempo_i, tiempo_f)
     return respuesta, delta_t
 
+
 def req_6(control,anio,mes,latitud,longitud,radio,n_actividades):
     """
     Retorna el resultado del requerimiento 6
@@ -145,11 +153,16 @@ def req_6(control,anio,mes,latitud,longitud,radio,n_actividades):
     return respuesta,delta_t
 
 
-def req_7(control,anio,mes):
+def req_7(control , mes, anio):
     """
     Retorna el resultado del requerimiento 7
     """
-
+    # TODO: Modificar el requerimiento 7
+    time_i = get_time()
+    respuesta = model.req_7(control , mes, anio)
+    tiempo_f = get_time()
+    delta_t = delta_time(time_i , tiempo_f)
+    return respuesta, delta_t    
 
 def req7_2(control,anio,mes):
     data_structs =control['model']

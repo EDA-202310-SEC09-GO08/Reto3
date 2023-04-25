@@ -122,6 +122,7 @@ def updateDateIndex(map, siniestro):
     addDateIndex(datentry, siniestro)
     return map
 
+
 def addDateIndex(datentry, siniestro):
     """
     Actualiza un indice de tipo de crimenes.  Este indice tiene una lista
@@ -133,6 +134,8 @@ def addDateIndex(datentry, siniestro):
     lt.addLast(lst, siniestro)
 
     return datentry
+
+
 def newDataEntry(siniestro):
     """
     Crea una entrada en el indice por fechas, es decir en el arbol
@@ -145,6 +148,7 @@ def newDataEntry(siniestro):
 
     return entry
 # Funciones de consulta
+
 
 def get_data(data_structs, id):
     """
@@ -161,6 +165,7 @@ def data_size(data_structs):
     #TODO: Crear la función para obtener el tamaño de una lista
     pass
 
+
 def fecha_hora_inicial(fecha):
     valor_fecha = fecha.replace('/','').replace(':','').replace(' ','').replace('+','')
     "vuelve la fecha a la manera que se organizo el dic"
@@ -173,6 +178,7 @@ def fecha_hora_inicial(fecha):
     respuesta = valor_fecha + "0"*ceros 
     "sumarle los ceros necesarios al valor "
     return respuesta
+
 
 def fecha_hora_final(fecha):
     valor_fecha = fecha.replace('/','').replace(':','').replace(' ','').replace('+','')
@@ -187,10 +193,13 @@ def fecha_hora_final(fecha):
     "sumarle los ceros necesarios al valor "
     return respuesta
 
+
 def devolver_value(mapa, key):
     llave_valor = mp.get(mapa, key)
     valor = me.getValue(llave_valor)
-    return valor 
+    return valor
+
+
 def organizar_rango_fechas_mas_reciente(data_structs,fecha1, fecha2):
     """
     Función que soluciona el requerimiento 1
@@ -219,24 +228,179 @@ def organizar_rango_fechas_mas_reciente(data_structs,fecha1, fecha2):
         i+=1
 
     return respuesta
+
+
+def organizar_rango_fechas_menos_reciente(data_structs,fecha1, fecha2):
+    """
+    Función que soluciona el requerimiento 1
+    """
+    # TODO: Realizar el requerimiento 1
+    
+    valor_fecha1 = fecha_hora_inicial(fecha1)
+    
+    valor_fecha2 = fecha_hora_final(fecha2)
+    "se convierte la fecha dada a tipo de llave"
+
+    llaves = om.values(data_structs["model"]["dateIndex"],valor_fecha1, valor_fecha2)
+    "se sacan los que esten en el rango dado"
+    respuesta = lt.newList()
+    tamanio = lt.size(llaves)
+    i =1
+    while i <= tamanio:
+        pos = lt.getElement(llaves,i)
+        "se saca el valor acorde en la lista"
+        dato = pos["lista_accidentes"]
+        "se deja solo la lista de accidentes "
+
+        valor = lt.getElement(dato,1)
+        "solo tendra un dato "
+        lt.addLast(respuesta,valor)
+        i+=1
+
+    return respuesta
+
+
 def req1(data_structs,fecha1, fecha2):
     respuesta = organizar_rango_fechas_mas_reciente(data_structs,fecha1, fecha2)
     return respuesta
 
-def req_2(data_structs):
+
+def aux_mes(mes):
+    #Funcion que saca el numero de dias del mes
+    respuesta = lt.newList()
+    if mes == "ENERO":
+        lt.addFirst(respuesta, 31)
+        lt.addLast(respuesta, 1)
+    if mes == "FEBRERO":
+        lt.addFirst(respuesta, 28)
+        lt.addLast(respuesta, 2)
+    if mes == "MARZO":
+        lt.addFirst(respuesta, 31)
+        lt.addLast(respuesta, 3)
+    if mes == "ABRIL":
+        lt.addFirst(respuesta, 30)
+        lt.addLast(respuesta, 4)
+    if mes == "MAYO":
+        lt.addFirst(respuesta, 31)
+        lt.addLast(respuesta, 5)
+    if mes == "JUNIO":
+        lt.addFirst(respuesta, 30)
+        lt.addLast(respuesta, 6)
+    if mes == "JULIO":
+        lt.addFirst(respuesta, 31)
+        lt.addLast(respuesta, 7)
+    if mes == "AGOSTO":
+        lt.addFirst(respuesta, 31)
+        lt.addLast(respuesta, 8)
+    if mes == "SEPTIEMBRE":
+        lt.addFirst(respuesta, 30)
+        lt.addLast(respuesta, 9)
+    if mes == "OCTUBRE":
+        lt.addFirst(respuesta, 31)
+        lt.addLast(respuesta, 10)
+    if mes == "NOVIEMBRE":
+        lt.addFirst(respuesta, 31)
+        lt.addLast(respuesta, 11)
+    if mes == "DICIEMBRE":
+        lt.addFirst(respuesta, 31)
+        lt.addLast(respuesta, 12)
+    return respuesta
+        
+    
+
+def aux_formato(anio , mes ,dia , hora):
+    #Funcion que pone todo en el formato que se lleva usando
+    hora_f = hora.replace(":" , "")
+    if dia < 10:
+        dia =str("0" + str(dia))
+        if mes < 10:
+            mes = str(mes)
+            respuesta = str(anio + "" + "0" + mes + "" + dia + "" + hora_f  )
+        else:
+            mes = str(mes)
+            respuesta=str(anio + "" + mes + "" + dia + "" + hora_f  )
+    else:
+        dia = str(dia)
+        if mes < 10:
+            mes = str(mes)
+            respuesta = str(anio + "" + "0" + mes + "" + dia + "" + hora_f  )
+        else:
+            mes = str(mes)
+            respuesta=str(anio + "" + mes + "" + dia + "" + hora_f  )
+    return respuesta
+    
+    
+def req_2(data_structs, anio , mes , hora_i, hora_f):
     """
     Función que soluciona el requerimiento 2
     """
     # TODO: Realizar el requerimiento 2
-    pass
+    resp_m= aux_mes(mes)
+    diasm = lt.getElement(resp_m , 0)
+    mes = lt.getElement(resp_m , 1)
+    i_d = 1
+    respuesta = lt.newList()
+    while i_d <= diasm :
+        fecha_1 = aux_formato(anio , mes, i_d, hora_i)
+        fecha_2 = aux_formato(anio , mes, i_d, hora_f)
+        fechas = organizar_rango_fechas_mas_reciente(data_structs , fecha_1, fecha_2)
+        fechas_s = lt.size(fechas)
+        i_f = 1
+        while i_f <= fechas_s:
+            pos = lt.getElement(fechas ,i_f)
+            lt.addLast(respuesta ,pos)
+            i_f += 1
+        i_d += 1
+    return respuesta
 
 
-def req_3(data_structs):
+def aux_verdadero (siniestro , clase , calle):
+    #Funcion para verificar si el siniestro es de la clase y calle indicada
+    clase_t = False
+    calle_t = False
+    respuesta = False
+    if calle in siniestro["DIRECCION"]:
+        calle_t = True
+    if clase == siniestro["CLASE_ACC"]:
+        clase_t = True
+    if clase_t == True and calle_t == True:
+        respuesta = True
+    return respuesta
+
+
+def req_3(data_structs , clase , calle):
     """
     Función que soluciona el requerimiento 3
     """
     # TODO: Realizar el requerimiento 3
-    pass
+    fecha_1 = "00000000000000"
+    fecha_2 = "99999999999999"
+    fechas = organizar_rango_fechas_mas_reciente(data_structs, fecha_1 , fecha_2)
+    tam = lt.size(fechas)
+    num = 1
+    respuesta = lt.newList()
+    resultados = lt.newList()
+    while num <= tam:
+        accidente = lt.getElement(fechas , num)
+        comparacion = aux_verdadero(accidente , clase, calle)
+        if comparacion == True:
+            lt.addLast(resultados , accidente)
+        num += 1
+    tam_resp = lt.size(resultados) 
+    pos = 1
+    if tam_resp >= 3:
+        while pos <= 3:
+            resp = lt.getElement(resultados, pos)
+            lt.addLast(respuesta, resp)
+        pos += 1
+        return respuesta
+    else:
+        return resultados
+
+                 
+    
+        
+    
 
 
 def req_4(data_structs,fecha1,fecha2,gravedad):
@@ -270,7 +434,6 @@ def req_4(data_structs,fecha1,fecha2,gravedad):
         return respuesta, size
     
     
-
 
 
 
@@ -406,12 +569,39 @@ def data_frame_accidentes_por_hora(data_structs,anio,mes):
     return dic_horas
 
 
-def req_7(data_structs):
+def aux_mas_menos (data_structs, hora_i, hora_f):
+#funcion que saca el accidente mas temprano y mas tarde en el intervalo
+    fechas = organizar_rango_fechas_mas_reciente( data_structs, hora_i, hora_f)
+    tam = lt.size(fechas)
+    menor = lt.getElement(fechas, (tam-1))
+    mayor = lt.getElement(fechas,1)
+    return menor, mayor
+
+
+
+def req_7(data_structs, mes , anio ):
     """
     Función que soluciona el requerimiento 7
     """
     # TODO: Realizar el requerimiento 7
-    pass
+    respuesta = lt.newList()
+    res_m = aux_mes(mes)
+    dias = lt.getElement(res_m, 0)
+    mes_res = lt.getElement(res_m , 1)
+    hora_0 = "00:00:00"
+    hora_23 = "23:59:59"    
+    i = 1
+    while i <= dias:
+        hora_i = aux_formato(anio , mes_res , i , hora_0)
+        hora_f = aux_formato(anio , mes_res , i , hora_23)
+        min_max = aux_mas_menos(data_structs , hora_i , hora_f)
+        menos = min_max[0]
+        mas = min_max[1]
+        lt.addLast(respuesta , menos)
+        lt.addLast(respuesta , mas)
+        i += 1
+    return respuesta
+        
 
 
 def req_8(data_structs):
