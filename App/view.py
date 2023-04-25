@@ -263,7 +263,8 @@ def print_req_7(control):
 
 
 def req_72(control,anio,mes):
-    respuesta_dic = controller.req7_2(control,anio,mes)
+    respuesta = controller.req7_2(control,anio,mes)
+    respuesta_dic = respuesta[0]
 
     lista_x = list(respuesta_dic)
 
@@ -287,7 +288,7 @@ def req_72(control,anio,mes):
     plt.ylabel('Frecuencia')
 
     plt.show()
-
+    print(respuesta[1])
 def print_req_8(control):
     """
         Función que imprime la solución del Requerimiento 8 en consola
