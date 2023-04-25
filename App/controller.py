@@ -133,8 +133,12 @@ def req_5(control,anio,mes,localidad):
     """
     Retorna el resultado del requerimiento 5
     """
-    # TODO: Modificar el requerimiento 5
-    return model.req_5(control['model'],anio,mes,localidad)
+    data_structs =control['model']
+    tiempo_i = get_time()
+    respuesta =model.req_5(data_structs,anio,mes,localidad)
+    tiempo_f = get_time()
+    delta_t = delta_time(tiempo_i, tiempo_f)
+    return respuesta, delta_t
 
 
 def req_6(control,anio,mes,latitud,longitud,radio,n_actividades):
@@ -161,10 +165,12 @@ def req_7(control , mes, anio):
     return respuesta, delta_t    
 
 def req7_2(control,anio,mes):
-    data_structs = control['model']
-    respuesta = model.data_frame_accidentes_por_hora(data_structs,anio,mes)
-    return respuesta
-
+    data_structs =control['model']
+    tiempo_i = get_time()
+    respuesta =model.data_frame_accidentes_por_hora(data_structs,anio,mes)
+    tiempo_f = get_time()
+    delta_t = delta_time(tiempo_i, tiempo_f)
+    return respuesta, delta_t
 def req_8(control):
     """
     Retorna el resultado del requerimiento 8

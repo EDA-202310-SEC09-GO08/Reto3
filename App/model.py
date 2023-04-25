@@ -440,55 +440,32 @@ def req_5(data_structs,anio,mes,localidad):
     Función que soluciona el requerimiento 5
     """
     arbol_fechas = data_structs['dateIndex']
-
     lim_inf = int(anio+mes)*10**10
     lim_sup = (int(anio+mes)+1)*10**10
-    
     lista_10 = []
     ##rango en single_linked
     rango_siniestros = om.values_array(arbol_fechas,lim_inf,lim_sup)
-
-
-
-    
     ###iterar rango hasta obtener los 10 más recientes de la localidad
-
     len_rango = lt.size(rango_siniestros)
     i=0
-    
     while i<=len_rango:
-            
             len_10 =len(lista_10)
-
             if len_10 ==10:
                 break
             lista_nodo = lt.getElement(rango_siniestros,len_rango-i)['lista_accidentes']
             len_lista_nodo = lt.size(lista_nodo)
             j=1
-
             while j<=len_lista_nodo:
                 accidente = lt.getElement(lista_nodo,j)
-
                 if accidente['LOCALIDAD']==localidad:
                     lista_10.append(accidente)
-
                 len_10 = len(lista_10)
-                
                 if len_10==10:
                     break
-
                 j+=1
-
             i+=1
-
-    
-
-  
     return lista_10
-  
-  
-  
-    pass
+
 
 
 
@@ -562,18 +539,14 @@ def req_6(data_structs,anio,mes,latitud,longitud,radio,n_actividades):
 def data_frame_accidentes_por_hora(data_structs,anio,mes):
 
     arbol_fechas = data_structs['dateIndex']
-
     lim_inf = int(anio+mes)*10**10
     lim_sup = (int(anio+mes)+1)*10**10
-    
-
     ##rango en single_linked
     rango_siniestros = om.values_array(arbol_fechas,lim_inf,lim_sup)
 
     #print(rango_siniestros)
     #crear dic
     dic_horas={}
-
     i =0
     while i<24:
         dic_horas[i]=0

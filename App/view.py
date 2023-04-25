@@ -241,11 +241,12 @@ def print_req_5(control):
     respuesta = controller.req_5(control,anio,mes,localidad)
 
     #print(respuesta)
-    lista_filt = filtrar_lista_dics_por_columnas(respuesta,["CODIGO_ACCIDENTE", "DIA_OCURRENCIA_ACC", "DIRECCION","GRAVEDAD","CLASE_ACC","LOCALIDAD", "FECHA_HORA_ACC","LATITUD","LONGITUD"])
+    lista_filt = filtrar_lista_dics_por_columnas(respuesta[0],["CODIGO_ACCIDENTE", "DIA_OCURRENCIA_ACC", "DIRECCION","GRAVEDAD","CLASE_ACC","LOCALIDAD", "FECHA_HORA_ACC","LATITUD","LONGITUD"])
 
     tabulate_respuesta = tabulate(lista_filt, headers='keys', maxcolwidths =[10]*9, maxheadercolwidths=[10]*9)
     print('Los 10 accidentes mas recientes para la fecha dada son: ')
     print(tabulate_respuesta)
+    print(respuesta[1])
 
 #
 def print_req_6(control):
@@ -305,7 +306,8 @@ def print_req_7(control):
 
 
 def req_72(control,anio,mes):
-    respuesta_dic = controller.req7_2(control,anio,mes)
+    respuesta = controller.req7_2(control,anio,mes)
+    respuesta_dic = respuesta[0]
 
     lista_x = list(respuesta_dic)
 
@@ -329,7 +331,7 @@ def req_72(control,anio,mes):
     plt.ylabel('Frecuencia')
 
     plt.show()
-
+    print(respuesta[1])
 def print_req_8(control):
     """
         Función que imprime la solución del Requerimiento 8 en consola
