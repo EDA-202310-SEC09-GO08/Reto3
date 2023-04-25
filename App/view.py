@@ -275,7 +275,7 @@ def print_req_7(control):
     anio =input('Ingrese el año que desea estudiar: ')
 
     mes = input('Ingrese el mes que desea estudiar (en mayusculas): ')
-    req_72(control,anio,mes)
+    #req_72(control,anio,mes)
     # TODO: Manuel, llama aca la función que hagas qye liste los primeros y últimos accidentes por dia
     # TODO: Imprimir el resultado del requerimiento 7
     respuesta = controller.req_7(control , mes , anio)
