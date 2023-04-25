@@ -276,6 +276,7 @@ def req_5(data_structs,anio,mes,localidad):
     """
     Función que soluciona el requerimiento 5
     """
+    
     arbol_fechas = data_structs['dateIndex']
 
     lim_inf = int(anio+mes)*10**10

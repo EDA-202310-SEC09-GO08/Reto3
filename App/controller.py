@@ -126,8 +126,9 @@ def req_5(control,anio,mes,localidad):
     """
     Retorna el resultado del requerimiento 5
     """
+    data_structs =control['model']
     tiempo_i = get_time()
-    respuesta =model.req_5(control,anio,mes,localidad)
+    respuesta =model.req_5(data_structs,anio,mes,localidad)
     tiempo_f = get_time()
     delta_t = delta_time(tiempo_i, tiempo_f)
     return respuesta, delta_t
