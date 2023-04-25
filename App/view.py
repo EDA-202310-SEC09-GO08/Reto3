@@ -285,13 +285,13 @@ def print_req_7(control):
     tamanio = len(res)
     i = 1
     while i <= tamanio:
+        imprimir = lt.newList()
         dia = res[i]
         fecha_entera = dia["FECHA_HORA_ACC"]
         fecha = fecha_entera[0:9]
         dia_s = res[i]
         fecha_entera_s = dia["FECHA_HORA_ACC"]
-        fecha_s = fecha_entera[0:9]
-        imprimir = lt.newList
+        fecha_s = fecha_entera_s[0:9]
         lt.addLast(imprimir , dia)
         if fecha == fecha_s:
             lt.addLast(imprimir , dia_s)
