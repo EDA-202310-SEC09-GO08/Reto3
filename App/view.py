@@ -161,13 +161,14 @@ def print_data(control, id):
     #TODO: Realizar la función para imprimir un elemento
     pass
 
+
 def print_req_1(control):
     """
         Función que imprime la solución del Requerimiento 1 en consola
     """
     # TODO: Imprimir el resultado del requerimiento 1
-    fecha1 = (input("Porfavor ingrese la fecha inicial en formato YY/MM/DD "))
-    fecha2 = (input("Porfavor ingrese la fecha final en formato YY/MM/DD "))
+    fecha1 = (input("Por favor ingrese la fecha inicial en formato YY/MM/DD "))
+    fecha2 = (input("Por favor ingrese la fecha final en formato YY/MM/DD "))
     respuesta =  controller.req_1(control,fecha1,fecha2)
     size = lt.size(respuesta[0])
     print( " There are " + str(size) + " between " + fecha1 + " and " + fecha2)
@@ -185,15 +186,33 @@ def print_req_2(control):
         Función que imprime la solución del Requerimiento 2 en consola
     """
     # TODO: Imprimir el resultado del requerimiento 2
-    pass
-
+    anio = (input("Por favor ingrese el año que desea estudiar: "))
+    mes = (input("Por favor ingrese el numero del mes que desea estudiar (en mayusculas): "))
+    hora_i = (input("Por favor ingrese la hora inicial del rango, en formato HH:MM:SS : "))
+    hora_f = (input("Por favor ingrese la hora final del rango en formato HH:MM:SS : "))
+    respuesta = controller.req_2(control , anio , mes , hora_i , hora_f )
+    size= lt.size(respuesta[0])
+    print( "Hay " + str(size) + " accidentes para el año " + anio + " para el mes de " + mes + "en el intervalo de horas " + hora_i + " y " + hora_f)
+    heads = ["CODIGO_ACCIDENTE", "FECHA_OCURRENCIA_ACC", "DIA_OCURRENCIA_ACC", "LOCALIDAD" , "DIRECCION" , "GRAVEDAD" , "CLASE_ACC" , "LATITUD" , "LONGITUD"]
+    res = filtrar_lista_dics_por(respuesta[0] , heads)
+    print(tabulate(res , headers= "keys" , tablefmt= "grid" , maxcolwidths= 15, maxheadercolwidths= 15 ))
+    print (" el tiempo es " + str(respuesta[1]))
+    
 
 def print_req_3(control):
     """
         Función que imprime la solución del Requerimiento 3 en consola
     """
     # TODO: Imprimir el resultado del requerimiento 3
-    pass
+    clase = (input("Por favor ingrese la clase de accidente que desea estudiar: "))
+    calle = (input("Por favor ingrese la calle que desea estudiar(todo en mayusculas):  "))
+    respuesta = controller.req_3(control , clase , calle)
+    heads = ["CODIGO_ACC" , "FECHA_HORA_ACC" , "DIA_OCURRENCIA_ACC" , "LOCALIDAD" , "DIRECCION" , "GRAVEDAD" , "CLASE_ACC" , "LATITUD" , "LONGITUD"]
+    res = filtrar_lista_dics_por(respuesta[0][0], heads)
+    print("Hay " + str(respuesta[0][1]) + " accidedentes de la clase " + clase + " occuridos a lo largo de la vía " +  calle + " y  los tres mas recientes son: ")
+    print(tabulate(res , headers="key" , tablefmt= "grid" , maxcolwidths=15, maxheadercolwidths=15))
+    print("El tiempo es " + str(respuesta[1]))
+    
 
 
 def print_req_4(control):
@@ -252,13 +271,26 @@ def print_req_7(control):
     """
         Función que imprime la solución del Requerimiento 7 en consola
     """
-    anio =input('ingrese año: ')
+    anio =input('Ingrese el año que desea estudiar: ')
 
-    mes = input('ingrese mes: ')
+    mes = input('Ingrese el mes que desea estudiar (en mayusculas): ')
     req_72(control,anio,mes)
     # TODO: Manuel, llama aca la función que hagas qye liste los primeros y últimos accidentes por dia
     # TODO: Imprimir el resultado del requerimiento 7
-    pass
+    respuesta = controller.req_7(control , mes , anio)
+    heads = ["CODIGO_ACCIDENTE" , "FECHA_HORA_ACC" , "DIA_OCURRENCIA_ACC" , "LOCALIDAD", "DIRECCION" , "GRAVEDAD" , "CLASE_ACC", "LATITUD" , "LONGITUD"]
+    res = filtrar_lista_dics_por(respuesta[0] , heads)
+    print("Accidentes más temprano y tardios para el mes de " + mes + " de " + anio)
+    tamanio = lt.size(res)
+    i = 0
+    while i < tamanio:
+        dia = res[i]
+        fecha_entera = dia["FECHA_HORA_ACC"]
+        fecha = fecha_entera[0:9]
+        print("Accidentes del día " + fecha)
+        print(tabulate(dia , headers= "keys", tablefmt= "grid" , maxcolwidths= 15, maxheadercolwidths= 15 ))
+        i += 1
+    print("el tiempo " + str(respuesta[1]))
 
 
 def req_72(control,anio,mes):
