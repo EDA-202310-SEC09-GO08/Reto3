@@ -270,37 +270,37 @@ def aux_mes(mes):
         lt.addFirst(respuesta, 31)
         lt.addLast(respuesta, 1)
     if mes == "FEBRERO":
-        lt.addLast(respuesta, 28)
+        lt.addFirst(respuesta, 28)
         lt.addLast(respuesta, 2)
     if mes == "MARZO":
-        lt.addLast(respuesta, 31)
+        lt.addFirst(respuesta, 31)
         lt.addLast(respuesta, 3)
     if mes == "ABRIL":
-        lt.addLast(respuesta, 30)
+        lt.addFirst(respuesta, 30)
         lt.addLast(respuesta, 4)
     if mes == "MAYO":
-        lt.addLast(respuesta, 31)
+        lt.addFirst(respuesta, 31)
         lt.addLast(respuesta, 5)
     if mes == "JUNIO":
-        lt.addLast(respuesta, 30)
+        lt.addFirst(respuesta, 30)
         lt.addLast(respuesta, 6)
     if mes == "JULIO":
-        lt.addLast(respuesta, 31)
+        lt.addFirst(respuesta, 31)
         lt.addLast(respuesta, 7)
     if mes == "AGOSTO":
-        lt.addLast(respuesta, 31)
+        lt.addFirst(respuesta, 31)
         lt.addLast(respuesta, 8)
     if mes == "SEPTIEMBRE":
-        lt.addLast(respuesta, 30)
+        lt.addFirst(respuesta, 30)
         lt.addLast(respuesta, 9)
     if mes == "OCTUBRE":
-        lt.addLast(respuesta, 31)
+        lt.addFirst(respuesta, 31)
         lt.addLast(respuesta, 10)
     if mes == "NOVIEMBRE":
         lt.addFirst(respuesta, 31)
         lt.addLast(respuesta, 11)
     if mes == "DICIEMBRE":
-        lt.addLast(respuesta, 31)
+        lt.addFirst(respuesta, 31)
         lt.addLast(respuesta, 12)
     return respuesta
         
@@ -573,10 +573,7 @@ def aux_mas_menos (data_structs, hora_i, hora_f):
     tam = lt.size(fechas)
     menor = lt.getElement(fechas, (tam-1))
     mayor = lt.getElement(fechas,1)
-    respuesta = lt.newList()
-    lt.addLast(respuesta , menor)
-    lt.addLast(respuesta , mayor)
-    return respuesta
+    return menor, mayor
 
 
 
@@ -587,8 +584,8 @@ def req_7(data_structs, mes , anio ):
     # TODO: Realizar el requerimiento 7
     respuesta = lt.newList()
     res_m = aux_mes(mes)
-    dias = res_m[0]
-    mes_res = res_m
+    dias = lt.getElement(res_m, 0)
+    mes_res = lt.getElement(res_m , 1)
     hora_0 = "00:00:00"
     hora_23 = "23:59:59"    
     i = 1
