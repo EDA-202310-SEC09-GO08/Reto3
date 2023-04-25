@@ -593,8 +593,8 @@ def req_7(data_structs, mes , anio ):
         hora_i = aux_formato(anio , mes_res , i , hora_0)
         hora_f = aux_formato(anio , mes_res , i , hora_23)
         min_max = aux_mas_menos(data_structs , hora_i , hora_f)
-        menos = lt.getElement(min_max, 0)
-        mas = lt.getElement(min_max, 1)
+        menos = min_max[0]
+        mas = min_max[1]
         lt.addLast(respuesta , menos)
         lt.addLast(respuesta , mas)
         i += 1
