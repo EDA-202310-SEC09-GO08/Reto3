@@ -50,8 +50,20 @@ dos listas, una para los videos, otra para las categorias de los mismos.
 # Construccion de modelos
 dic_meses_string_a_num ={}
 
-dic_meses_string_a_num['enero']= "01"
+dic_meses_string_a_num['ENERO']= "01"
+dic_meses_string_a_num['FEBRERO']='02'
+dic_meses_string_a_num['MARZO']='03'
+dic_meses_string_a_num['ABRIL']='04'
+dic_meses_string_a_num['MAYO']='05'
+dic_meses_string_a_num['JUNIO']='06'
+dic_meses_string_a_num['JULIO']='07'
+dic_meses_string_a_num['AGOSTO']='08'
+dic_meses_string_a_num['SEPTIEMBRE']='09'
+dic_meses_string_a_num['OCTUBRE']='10'
+dic_meses_string_a_num['NOVIEMBRE']='11'
+dic_meses_string_a_num['DICIEMBRE']='12'
 
+lista_meses_num =['01','02','03','04','05','06','07','08','09','10','11','12']
 def new_data_structs():
     """
     Inicializa las estructuras de datos del modelo. Las crea de
