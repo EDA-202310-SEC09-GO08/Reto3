@@ -267,39 +267,39 @@ def aux_mes(mes):
     #Funcion que saca el numero de dias del mes
     respuesta = lt.newList()
     if mes == "ENERO":
-        lt.addLast(respuesta, 31)
+        lt.addFirst(respuesta, 31)
         lt.addLast(respuesta, 1)
-    elif mes == "FEBRERO":
+    if mes == "FEBRERO":
         lt.addLast(respuesta, 28)
         lt.addLast(respuesta, 2)
-    elif mes == "MARZO":
+    if mes == "MARZO":
         lt.addLast(respuesta, 31)
         lt.addLast(respuesta, 3)
-    elif mes == "ABRIL":
+    if mes == "ABRIL":
         lt.addLast(respuesta, 30)
         lt.addLast(respuesta, 4)
-    elif mes == "MAYO":
+    if mes == "MAYO":
         lt.addLast(respuesta, 31)
         lt.addLast(respuesta, 5)
-    elif mes == "JUNIO":
+    if mes == "JUNIO":
         lt.addLast(respuesta, 30)
         lt.addLast(respuesta, 6)
-    elif mes == "JULIO":
+    if mes == "JULIO":
         lt.addLast(respuesta, 31)
         lt.addLast(respuesta, 7)
-    elif mes == "AGOSTO":
+    if mes == "AGOSTO":
         lt.addLast(respuesta, 31)
         lt.addLast(respuesta, 8)
-    elif mes == "SEPTIEMBRE":
+    if mes == "SEPTIEMBRE":
         lt.addLast(respuesta, 30)
         lt.addLast(respuesta, 9)
-    elif mes == "OCTUBRE":
+    if mes == "OCTUBRE":
         lt.addLast(respuesta, 31)
         lt.addLast(respuesta, 10)
-    elif mes == "NOVIEMBRE":
-        lt.addLast(respuesta, 31)
+    if mes == "NOVIEMBRE":
+        lt.addFirst(respuesta, 31)
         lt.addLast(respuesta, 11)
-    elif mes == "DICIEMBRE":
+    if mes == "DICIEMBRE":
         lt.addLast(respuesta, 31)
         lt.addLast(respuesta, 12)
     return respuesta
@@ -324,8 +324,8 @@ def req_2(data_structs, anio , mes , hora_i, hora_f):
     """
     # TODO: Realizar el requerimiento 2
     resp_m= aux_mes(mes)
-    diasm = resp_m[0]
-    mes = resp_m[1]
+    diasm = lt.getElement(resp_m , 0)
+    mes = lt.getElement(resp_m , 1)
     i_d = 1
     respuesta = lt.newList()
     while i_d <= diasm :
@@ -349,7 +349,7 @@ def aux_verdadero (siniestro , clase , calle):
     respuesta = False
     if calle in siniestro["DIRECCION"]:
         calle_t = True
-    if clase == siniestro["CLASSE_ACC"]:
+    if clase == siniestro["CLASE_ACC"]:
         clase_t = True
     if clase_t == True and calle_t == True:
         respuesta = True
@@ -361,27 +361,30 @@ def req_3(data_structs , clase , calle):
     Función que soluciona el requerimiento 3
     """
     # TODO: Realizar el requerimiento 3
-    arbol = data_structs["dateIndex"]
-    resultados = lt.newList()
+    fecha_1 = "00000000000000"
+    fecha_2 = "99999999999999"
+    fechas = organizar_rango_fechas_mas_reciente(data_structs, fecha_1 , fecha_2)
+    tam = lt.size(fechas)
+    num = 1
     respuesta = lt.newList()
-    for i in arbol:
-        valores = devolver_value(arbol, i)
-        tamanio = lt.size(valores)
-        i_t = 0
-        while i_t < tamanio:
-            siniestro = valores[i]
-            comparacion = aux_verdadero(siniestro , clase , calle)
-            if comparacion == True:
-                lt.addFirst(resultados, siniestro)
-    tam_resp = lt.size(resultados)
-    a = 1
-    if tam_resp > 3:
-        while a <= 3:
-            lt.addFirst(respuesta, resultados[a])
+    resultados = lt.newList()
+    while num <= tam:
+        accidente = lt.getElement(fechas , num)
+        comparacion = aux_verdadero(accidente , clase, calle)
+        if comparacion == True:
+            lt.addLast(resultados , accidente)
+        num += 1
+    tam_resp = lt.size(resultados) 
+    pos = 1
+    if tam_resp >= 3:
+        while pos <= 3:
+            resp = lt.getElement(resultados, pos)
+            lt.addLast(respuesta, resp)
+        pos += 1
         return respuesta
     else:
         return resultados
-                
+
                  
     
         

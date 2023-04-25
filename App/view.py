@@ -187,7 +187,7 @@ def print_req_2(control):
     """
     # TODO: Imprimir el resultado del requerimiento 2
     anio = (input("Por favor ingrese el año que desea estudiar: "))
-    mes = (input("Por favor ingrese el numero del mes que desea estudiar (en mayusculas): "))
+    mes = (input("Por favor ingrese el mes que desea estudiar (en mayusculas): "))
     hora_i = (input("Por favor ingrese la hora inicial del rango, en formato HH:MM:SS : "))
     hora_f = (input("Por favor ingrese la hora final del rango en formato HH:MM:SS : "))
     respuesta = controller.req_2(control , anio , mes , hora_i , hora_f )
@@ -287,9 +287,20 @@ def print_req_7(control):
         dia = res[i]
         fecha_entera = dia["FECHA_HORA_ACC"]
         fecha = fecha_entera[0:9]
-        print("Accidentes del día " + fecha)
-        print(tabulate(dia , headers= "keys", tablefmt= "grid" , maxcolwidths= 15, maxheadercolwidths= 15 ))
-        i += 1
+        dia_s = res[i]
+        fecha_entera_s = dia["FECHA_HORA_ACC"]
+        fecha_s = fecha_entera[0:9]
+        imprimir = lt.newList
+        lt.addLast(imprimir , dia)
+        if fecha == fecha_s:
+            lt.addLast(imprimir , dia_s)
+            print("Accidentes del día " + fecha)
+            print(tabulate(imprimir , headers= "keys", tablefmt= "grid" , maxcolwidths= 15, maxheadercolwidths= 15 ))
+            i += 2
+        else:
+            print("Accidentes del día " + fecha)
+            print(tabulate(imprimir , headers= "keys", tablefmt= "grid" , maxcolwidths= 15, maxheadercolwidths= 15 ))
+            i += 1 
     print("el tiempo " + str(respuesta[1]))
 
 
