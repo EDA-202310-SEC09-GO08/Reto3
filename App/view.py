@@ -282,8 +282,8 @@ def print_req_7(control):
     res = filtrar_lista_dics_por(respuesta[0] , heads)
     print("Accidentes más temprano y tardios para el mes de " + mes + " de " + anio)
     tamanio = lt.size(res)
-    i = 0
-    while i < tamanio:
+    i = 1
+    while i <= tamanio:
         dia = res[i]
         fecha_entera = dia["FECHA_HORA_ACC"]
         fecha = fecha_entera[0:9]
