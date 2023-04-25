@@ -308,23 +308,23 @@ def aux_mes(mes):
 
 def aux_formato(anio , mes ,dia , hora):
     #Funcion que pone todo en el formato que se lleva usando
-    hora_f = hora.replace(":" , " ")
+    hora_f = hora.replace(":" , "")
     if dia < 10:
         dia =str("0" + str(dia))
         if mes < 10:
             mes = str(mes)
-            respuesta = str(anio + " " + "0" + mes + " " + dia + " " + hora_f  )
+            respuesta = str(anio + "" + "0" + mes + "" + dia + "" + hora_f  )
         else:
             mes = str(mes)
-            respuesta=str(anio + " " + mes + " " + dia + " " + hora_f  )
+            respuesta=str(anio + "" + mes + "" + dia + "" + hora_f  )
     else:
         dia = str(dia)
         if mes < 10:
             mes = str(mes)
-            respuesta = str(anio + " " + "0" + mes + " " + dia + " " + hora_f  )
+            respuesta = str(anio + "" + "0" + mes + "" + dia + "" + hora_f  )
         else:
             mes = str(mes)
-            respuesta=str(anio + " " + mes + " " + dia + " " + hora_f  )
+            respuesta=str(anio + "" + mes + "" + dia + "" + hora_f  )
     return respuesta
     
     
@@ -596,10 +596,11 @@ def data_frame_accidentes_por_hora(data_structs,anio,mes):
 
 def aux_mas_menos (data_structs, hora_i, hora_f):
 #funcion que saca el accidente mas temprano y mas tarde en el intervalo
-    arbol = data_structs["dateIndex"]
+    fechas = organizar_rango_fechas_mas_reciente( data_structs, hora_i, hora_f)
+    tam = lt.size(fechas)
+    menor = lt.getElement(fechas, (tam-1))
+    mayor = lt.getElement(fechas,1)
     respuesta = lt.newList()
-    menor = om.ceiling(arbol , hora_i)
-    mayor = om.floor(arbol , hora_f)
     lt.addLast(respuesta , menor)
     lt.addLast(respuesta , mayor)
     return respuesta
@@ -614,7 +615,7 @@ def req_7(data_structs, mes , anio ):
     respuesta = lt.newList()
     res_m = aux_mes(mes)
     dias = res_m[0]
-    mes_res = res_m[1]
+    mes_res = res_m
     hora_0 = "00:00:00"
     hora_23 = "23:59:59"    
     i = 1
@@ -622,8 +623,10 @@ def req_7(data_structs, mes , anio ):
         hora_i = aux_formato(anio , mes_res , i , hora_0)
         hora_f = aux_formato(anio , mes_res , i , hora_23)
         min_max = aux_mas_menos(data_structs , hora_i , hora_f)
-        lt.addLast(respuesta , min_max[0])
-        lt.addLast(respuesta , min_max[0])
+        menos = lt.getElement(min_max, 0)
+        mas = lt.getElement(min_max, 1)
+        lt.addLast(respuesta , menos)
+        lt.addLast(respuesta , mas)
         i += 1
     return respuesta
         
