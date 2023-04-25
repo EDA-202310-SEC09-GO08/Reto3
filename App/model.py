@@ -48,7 +48,9 @@ dos listas, una para los videos, otra para las categorias de los mismos.
 """
 
 # Construccion de modelos
+dic_meses_string_a_num ={}
 
+dic_meses_string_a_num['enero']= "01"
 
 def new_data_structs():
     """
