@@ -310,11 +310,21 @@ def aux_formato(anio , mes ,dia , hora):
     #Funcion que pone todo en el formato que se lleva usando
     hora_f = hora.replace(":" , " ")
     if dia < 10:
-        dia =str("0" + dia)
-    if mes < 10:
-        respuesta = str(anio + " " + "0" + mes + " " + dia + " " + hora_f  )
+        dia =str("0" + str(dia))
+        if mes < 10:
+            mes = str(mes)
+            respuesta = str(anio + " " + "0" + mes + " " + dia + " " + hora_f  )
+        else:
+            mes = str(mes)
+            respuesta=str(anio + " " + mes + " " + dia + " " + hora_f  )
     else:
-        respuesta=str(anio + " " + mes + " " + dia + " " + hora_f  )
+        dia = str(dia)
+        if mes < 10:
+            mes = str(mes)
+            respuesta = str(anio + " " + "0" + mes + " " + dia + " " + hora_f  )
+        else:
+            mes = str(mes)
+            respuesta=str(anio + " " + mes + " " + dia + " " + hora_f  )
     return respuesta
     
     
@@ -332,12 +342,12 @@ def req_2(data_structs, anio , mes , hora_i, hora_f):
         fecha_1 = aux_formato(anio , mes, i_d, hora_i)
         fecha_2 = aux_formato(anio , mes, i_d, hora_f)
         fechas = organizar_rango_fechas_mas_reciente(data_structs , fecha_1, fecha_2)
-        for i_f in fechas:
+        fechas_s = lt.size(fechas)
+        i_f = 1
+        while i_f <= fechas_s:
             pos = lt.getElement(fechas ,i_f)
-            
-            dato = pos["lista_accidentes"]
-            valor = lt.getElement(dato, 1)
-            lt.addFirst(respuesta ,valor)
+            lt.addLast(respuesta ,pos)
+            i_f += 1
         i_d += 1
     return respuesta
 
