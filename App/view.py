@@ -192,8 +192,8 @@ def print_req_2(control):
     hora_f = (input("Por favor ingrese la hora final del rango en formato HH:MM:SS : "))
     respuesta = controller.req_2(control , anio , mes , hora_i , hora_f )
     size= lt.size(respuesta[0])
-    print( "Hay " + str(size) + " accidentes para el año " + anio + " para el mes de " + mes + "en el intervalo de horas " + hora_i + " y " + hora_f)
-    heads = ["CODIGO_ACCIDENTE", "FECHA_OCURRENCIA_ACC", "DIA_OCURRENCIA_ACC", "LOCALIDAD" , "DIRECCION" , "GRAVEDAD" , "CLASE_ACC",'FECHA_HORA_ACC' , "LATITUD" , "LONGITUD"]
+    print( "\n Hay " + str(size) + " accidentes para el año " + anio + " para el mes de " + mes + " en el intervalo de horas " + hora_i + " y " + hora_f + "\n")
+    heads = ["CODIGO_ACCIDENTE", "HORA_OCURRENCIA_ACC" , "FECHA_OCURRENCIA_ACC" , "DIA_OCURRENCIA_ACC" ,"LOCALIDAD" , "DIRECCION" ,  "GRAVEDAD" , "CLASE_ACC" , "LATITUD" , "LONGITUD" ]
     res = filtrar_lista_dics_por(respuesta[0] , heads)
     print(tabulate(res , headers= "keys" , tablefmt= "grid" , maxcolwidths= 15, maxheadercolwidths= 15 ))
     print (" el tiempo es " + str(respuesta[1]))
@@ -209,7 +209,7 @@ def print_req_3(control):
     respuesta = controller.req_3(control , clase , calle)
     heads = ["CODIGO_ACC" , "FECHA_HORA_ACC" , "DIA_OCURRENCIA_ACC" , "LOCALIDAD" , "DIRECCION" , "GRAVEDAD" , "CLASE_ACC" , "LATITUD" , "LONGITUD"]
     res = filtrar_lista_dics_por(respuesta[0][0], heads)
-    print("Hay " + str(respuesta[0][1]) + " accidedentes de la clase " + clase + " occuridos a lo largo de la vía " +  calle + " y  los tres mas recientes son: ")
+    print("\n Hay " + str(respuesta[0][1]) + " accidedentes de la clase " + clase + " occuridos a lo largo de la vía " +  calle + " y  los tres mas recientes son: ")
     print(tabulate(res , headers="key" , tablefmt= "grid" , maxcolwidths=15, maxheadercolwidths=15))
     print("El tiempo es " + str(respuesta[1]))
     

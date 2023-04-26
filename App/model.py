@@ -348,13 +348,21 @@ def req_2(data_structs, anio , mes , hora_i, hora_f):
     """
     # TODO: Realizar el requerimiento 2
     resp_m= aux_mes(mes)
-    diasm = lt.getElement(resp_m , 0)
-    mes = lt.getElement(resp_m , 1)
+    diasm = lt.getElement(resp_m , 1)
+    mes = lt.getElement(resp_m , 2)
     i_d = 1
     respuesta = lt.newList()
     while i_d <= diasm :
-        fecha_1 = aux_formato(anio , mes, i_d, hora_i)
-        fecha_2 = aux_formato(anio , mes, i_d, hora_f)
+        dia = str(i_d)
+        dia_f = str(i_d)
+        if i_d < 10:
+            dia = str("0" + dia)    
+            dia_f = str("0" + dia_f)
+        mes_d = str(mes)
+        fecha_1 = str(anio + "/" + mes_d + "/" + dia + " " + hora_i)
+        fecha_2 = str(anio + "/" + mes_d + "/" + dia_f + " " +hora_f)
+        print(fecha_1)
+        print(fecha_2)
         fechas = organizar_rango_fechas_mas_reciente(data_structs , fecha_1, fecha_2)
         fechas_s = lt.size(fechas)
         i_f = 1
