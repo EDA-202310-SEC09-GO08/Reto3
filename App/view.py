@@ -286,15 +286,14 @@ def print_req_7(control):
     print("Accidentes más temprano y tardios para el mes de " + mes + " de " + anio)
     tamanio = len(res)
     i = 1
-    print(res)
     while i <= tamanio:
         imprimir = lt.newList()
         dia = res[i]
         fecha_entera = dia["FECHA_HORA_ACC"]
-        fecha = fecha_entera[0:9]
+        fecha = fecha_entera[0:10]
         dia_s = res[i]
         fecha_entera_s = dia["FECHA_HORA_ACC"]
-        fecha_s = fecha_entera_s[0:9]
+        fecha_s = fecha_entera_s[0:10]
         lt.addLast(imprimir , dia)
         if fecha == fecha_s:
             lt.addLast(imprimir , dia_s)
