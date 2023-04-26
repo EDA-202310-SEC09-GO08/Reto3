@@ -287,19 +287,21 @@ def print_req_7(control):
     tamanio = len(res)
     i = 1
     while i <= tamanio:
-        imprimir = lt.newList()
+        imprimir = []
         dia = res[i]
         fecha_entera = dia["FECHA_HORA_ACC"]
         fecha = fecha_entera[0:10]
         dia_s = res[i]
         fecha_entera_s = dia["FECHA_HORA_ACC"]
         fecha_s = fecha_entera_s[0:10]
-        lt.addLast(imprimir , dia)
+        imprimir.append(dia)
+        #lt.addLast(imprimir , dia)
         if fecha == fecha_s:
-            lt.addLast(imprimir , dia_s)
+            imprimir.append(dia_s)
+            #lt.addLast(imprimir , dia_s)
             print("Accidentes del día " + fecha)
-            #print(tabulate(imprimir , headers= "keys", tablefmt= "grid" , maxcolwidths= 15, maxheadercolwidths= 15 ))
-            print(imprimir)
+            print(tabulate(imprimir , headers="keys" , tablefmt= "grid" , maxcolwidths= 15, maxheadercolwidths= 15 ))
+            #print(imprimir)
             i += 2
         else:
             print("Accidentes del día " + fecha)
