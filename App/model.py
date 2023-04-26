@@ -250,7 +250,7 @@ def organizar_rango_fechas_menos_reciente(data_structs,fecha1, fecha2):
     
     valor_fecha1 = fecha_hora_inicial(fecha1)
     
-    valor_fecha2 = fecha_hora_final(fecha2)
+    valor_fecha2 = fecha_hora_inicial(fecha2)
     "se convierte la fecha dada a tipo de llave"
 
     llaves = om.values(data_structs["model"]["dateIndex"],valor_fecha1, valor_fecha2)
@@ -322,7 +322,7 @@ def aux_mes(mes):
 
 def aux_formato(anio , mes ,dia , hora):
     #Funcion que pone todo en el formato que se lleva usando
-    hora_f = hora.replace(":" , "")
+    hora_f = hora.replace(":" , "").replace(" " , "")
     if dia < 10:
         dia =str("0" + str(dia))
         if mes < 10:
@@ -361,14 +361,12 @@ def req_2(data_structs, anio , mes , hora_i, hora_f):
         mes_d = str(mes)
         fecha_1 = str(anio + "/" + mes_d + "/" + dia + " " + hora_i)
         fecha_2 = str(anio + "/" + mes_d + "/" + dia_f + " " +hora_f)
-        print(fecha_1)
-        print(fecha_2)
-        fechas = organizar_rango_fechas_mas_reciente(data_structs , fecha_1, fecha_2)
+        fechas = organizar_rango_fechas_menos_reciente(data_structs , fecha_1, fecha_2)
         fechas_s = lt.size(fechas)
         i_f = 1
         while i_f <= fechas_s:
             pos = lt.getElement(fechas ,i_f)
-            lt.addLast(respuesta ,pos)
+            lt.addFirst(respuesta ,pos)
             i_f += 1
         i_d += 1
     return respuesta
