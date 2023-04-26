@@ -193,7 +193,7 @@ def print_req_2(control):
     respuesta = controller.req_2(control , anio , mes , hora_i , hora_f )
     size= lt.size(respuesta[0])
     print( "Hay " + str(size) + " accidentes para el año " + anio + " para el mes de " + mes + "en el intervalo de horas " + hora_i + " y " + hora_f)
-    heads = ["CODIGO_ACCIDENTE", "FECHA_OCURRENCIA_ACC", "DIA_OCURRENCIA_ACC", "LOCALIDAD" , "DIRECCION" , "GRAVEDAD" , "CLASE_ACC" , "LATITUD" , "LONGITUD"]
+    heads = ["CODIGO_ACCIDENTE", "FECHA_OCURRENCIA_ACC", "DIA_OCURRENCIA_ACC", "LOCALIDAD" , "DIRECCION" , "GRAVEDAD" , "CLASE_ACC",'FECHA_HORA_ACC' , "LATITUD" , "LONGITUD"]
     res = filtrar_lista_dics_por(respuesta[0] , heads)
     print(tabulate(res , headers= "keys" , tablefmt= "grid" , maxcolwidths= 15, maxheadercolwidths= 15 ))
     print (" el tiempo es " + str(respuesta[1]))
@@ -235,14 +235,14 @@ def print_req_4(control):
 def print_req_5(control):
 
     anio =(input('Ingrese año: '))
-    mes = (input ('Ingrese mes en formato númerico ej 03 para marzo'))
+    mes = (input ('Ingrese mes en formato de 2 dígitos o en MAYÚSCULAS: '))
     localidad =(input('ingrese localidad en MAYUSCULAS SIN TILDES: '))
 
     respuesta = controller.req_5(control,anio,mes,localidad)
 
     #print(respuesta)
     lista_filt = filtrar_lista_dics_por_columnas(respuesta[0],["CODIGO_ACCIDENTE", "DIA_OCURRENCIA_ACC", "DIRECCION","GRAVEDAD","CLASE_ACC","LOCALIDAD", "FECHA_HORA_ACC","LATITUD","LONGITUD"])
-
+    print(lista_filt)
     tabulate_respuesta = tabulate(lista_filt, headers='keys', maxcolwidths =[10]*9, maxheadercolwidths=[10]*9)
     print('Los 10 accidentes mas recientes para la fecha dada son: ')
     print(tabulate_respuesta)
@@ -275,6 +275,8 @@ def print_req_7(control):
     anio =input('Ingrese el año que desea estudiar: ')
 
     mes = input('Ingrese el mes que desea estudiar (en mayusculas): ')
+
+    req_72(control,anio,mes)
     #req_72(control,anio,mes)
     # TODO: Manuel, llama aca la función que hagas qye liste los primeros y últimos accidentes por dia
     # TODO: Imprimir el resultado del requerimiento 7
