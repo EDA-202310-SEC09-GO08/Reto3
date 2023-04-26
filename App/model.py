@@ -548,7 +548,7 @@ def req_6(data_structs,anio,mes,latitud,longitud,radio,n_actividades):
 
 #### Funciones req 7
 
-
+#
 #Crea diccionario con llave hora y valor numero de accidentes
 def data_frame_accidentes_por_hora(data_structs,anio,mes):
 
