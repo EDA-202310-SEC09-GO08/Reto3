@@ -554,8 +554,8 @@ def req_6(data_structs,anio,mes,latitud,longitud,radio,n_actividades):
 #Crea diccionario con llave hora y valor numero de accidentes
 def data_frame_accidentes_por_hora(data_structs,anio,mes):
 
-    if anio not in lista_meses_num:
-        anio =dic_meses_string_a_num[anio]
+    if mes not in lista_meses_num:
+        mes =dic_meses_string_a_num[mes]
     arbol_fechas = data_structs['dateIndex']
     lim_inf = int(anio+mes)*10**10
     lim_sup = (int(anio+mes)+1)*10**10
