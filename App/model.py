@@ -279,7 +279,7 @@ def req1(data_structs,fecha1, fecha2):
 
 def aux_mes(mes):
     #Funcion que saca el numero de dias del mes
-    respuesta = lt.newList()
+    respuesta = lt.newList("ARRAY_LIST")
     if mes == "ENERO":
         lt.addFirst(respuesta, 31)
         lt.addLast(respuesta, 1)
@@ -610,9 +610,10 @@ def req_7(data_structs, mes , anio ):
     i = 1
     while i <= dias:
         dia = str(i)
+        dia_f = str(i + 1)
         mes_d = str(mes_res)
         hora_i = str(anio + "/" + mes_d + "/" + dia)
-        hora_f = str(anio + "/" + mes_d + "/" + dia)
+        hora_f = str(anio + "/" + mes_d + "/" + dia_f)
         min_max = aux_mas_menos(data_structs , hora_i , hora_f)
         if min_max != None:
             menos = min_max[0]
@@ -620,6 +621,7 @@ def req_7(data_structs, mes , anio ):
             lt.addLast(respuesta , menos)
             lt.addLast(respuesta , mas)
         i += 1
+    print(res_m)
     return respuesta
         
 

@@ -286,6 +286,7 @@ def print_req_7(control):
     print("Accidentes más temprano y tardios para el mes de " + mes + " de " + anio)
     tamanio = len(res)
     i = 1
+    print(res)
     while i <= tamanio:
         imprimir = lt.newList()
         dia = res[i]
