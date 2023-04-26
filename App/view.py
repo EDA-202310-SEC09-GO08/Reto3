@@ -242,7 +242,7 @@ def print_req_5(control):
 
     #print(respuesta)
     lista_filt = filtrar_lista_dics_por_columnas(respuesta[0],["CODIGO_ACCIDENTE", "DIA_OCURRENCIA_ACC", "DIRECCION","GRAVEDAD","CLASE_ACC","LOCALIDAD", "FECHA_HORA_ACC","LATITUD","LONGITUD"])
-
+    print(lista_filt)
     tabulate_respuesta = tabulate(lista_filt, headers='keys', maxcolwidths =[10]*9, maxheadercolwidths=[10]*9)
     print('Los 10 accidentes mas recientes para la fecha dada son: ')
     print(tabulate_respuesta)

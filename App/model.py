@@ -453,6 +453,8 @@ def req_5(data_structs,anio,mes,localidad):
     """
     Función que soluciona el requerimiento 5
     """
+    if mes not in lista_meses_num:
+        mes =dic_meses_string_a_num[mes]
     arbol_fechas = data_structs['dateIndex']
     lim_inf = int(anio+mes)*10**10
     lim_sup = (int(anio+mes)+1)*10**10
