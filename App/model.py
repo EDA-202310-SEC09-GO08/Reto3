@@ -605,8 +605,8 @@ def req_7(data_structs, mes , anio ):
     # TODO: Realizar el requerimiento 7
     respuesta = lt.newList()
     res_m = aux_mes(mes)
-    dias = lt.getElement(res_m, 0)
-    mes_res = lt.getElement(res_m , 1)
+    dias = lt.getElement(res_m, 1)
+    mes_res = lt.getElement(res_m , 2)
     i = 1
     while i <= dias:
         dia = str(i)
@@ -621,7 +621,6 @@ def req_7(data_structs, mes , anio ):
             lt.addLast(respuesta , menos)
             lt.addLast(respuesta , mas)
         i += 1
-    print(res_m)
     return respuesta
         
 
