@@ -610,10 +610,9 @@ def req_7(data_structs, mes , anio ):
     i = 1
     while i <= dias:
         dia = str(i)
-        dia_f = str(i + 1)
+        dia_f = str(i)
         if i < 10:
             dia = str("0" + dia)    
-        if i + 1 < 10:
             dia_f = str("0" + dia_f)
         mes_d = str(mes_res)
         hora_i = str(anio + "/" + mes_d + "/" + dia)
