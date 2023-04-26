@@ -401,11 +401,9 @@ def req_3(data_structs , clase , calle):
     while num <= tam:
         accidente = lt.getElement(fechas , num)
         comparacion = aux_verdadero(accidente , clase, calle)
-        print(comparacion)
         if comparacion == True:
             lt.addLast(resultados , accidente)
         num += 1
-    print(resultados)
     tam_resp = lt.size(resultados) 
     pos = 1
     if tam_resp >= 3:
