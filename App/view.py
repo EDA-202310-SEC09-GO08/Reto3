@@ -281,11 +281,9 @@ def print_req_7(control):
     # TODO: Manuel, llama aca la función que hagas qye liste los primeros y últimos accidentes por dia
     # TODO: Imprimir el resultado del requerimiento 7
     respuesta = controller.req_7(control , mes , anio)
-    heads = ["CODIGO_ACCIDENTE" , "FECHA_HORA_ACC" , "DIA_OCURRENCIA_ACC" , "LOCALIDAD", "DIRECCION" , "GRAVEDAD" , "CLASE_ACC", "LATITUD" , "LONGITUD"]
+    heads = ["CODIGO_ACCIDENTE" , "DIA_OCURRENCIA_ACC" , "DIRECCION" , "GRAVEDAD" , "CLASE_ACC" , "LOCALIDAD" , "FECHA_HORA_ACC" , "LATITUD" , "LONGITUD"]
     res = filtrar_lista_dics_por(respuesta[0] , heads)
     print("Accidentes más temprano y tardios para el mes de " + mes + " de " + anio)
-    tamanio = len(res)
-    print(res)
     i = 0
     while i + 1 <= tamanio:
         imprimir = []
