@@ -391,26 +391,28 @@ def req_3(data_structs , clase , calle):
     Función que soluciona el requerimiento 3
     """
     # TODO: Realizar el requerimiento 3
-    fecha_1 = "00000000000000"
-    fecha_2 = "99999999999999"
+    fecha_1 = "2005"
+    fecha_2 = "2025"
     fechas = organizar_rango_fechas_mas_reciente(data_structs, fecha_1 , fecha_2)
     tam = lt.size(fechas)
     num = 1
-    respuesta = lt.newList()
-    resultados = lt.newList()
+    respuesta = lt.newList("ARRAY_LIST")
+    resultados = lt.newList("ARRAY_LIST")
     while num <= tam:
         accidente = lt.getElement(fechas , num)
         comparacion = aux_verdadero(accidente , clase, calle)
+        print(comparacion)
         if comparacion == True:
             lt.addLast(resultados , accidente)
         num += 1
+    print(resultados)
     tam_resp = lt.size(resultados) 
     pos = 1
     if tam_resp >= 3:
         while pos <= 3:
             resp = lt.getElement(resultados, pos)
             lt.addLast(respuesta, resp)
-        pos += 1
+            pos += 1
         return respuesta
     else:
         return resultados
