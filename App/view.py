@@ -235,7 +235,7 @@ def print_req_4(control):
 def print_req_5(control):
 
     anio =(input('Ingrese año: '))
-    mes = (input ('Ingrese mes en formato númerico ej 03 para marzo'))
+    mes = (input ('Ingrese mes en formato de 2 dígitos o en MAYÚSCULAS: '))
     localidad =(input('ingrese localidad en MAYUSCULAS SIN TILDES: '))
 
     respuesta = controller.req_5(control,anio,mes,localidad)
