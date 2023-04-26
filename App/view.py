@@ -193,7 +193,7 @@ def print_req_2(control):
     respuesta = controller.req_2(control , anio , mes , hora_i , hora_f )
     size= lt.size(respuesta[0])
     print( "Hay " + str(size) + " accidentes para el año " + anio + " para el mes de " + mes + "en el intervalo de horas " + hora_i + " y " + hora_f)
-    heads = ["CODIGO_ACCIDENTE", "FECHA_OCURRENCIA_ACC", "DIA_OCURRENCIA_ACC", "LOCALIDAD" , "DIRECCION" , "GRAVEDAD" , "CLASE_ACC" , "LATITUD" , "LONGITUD"]
+    heads = ["CODIGO_ACCIDENTE", "FECHA_OCURRENCIA_ACC", "DIA_OCURRENCIA_ACC", "LOCALIDAD" , "DIRECCION" , "GRAVEDAD" , "CLASE_ACC",'FECHA_HORA_ACC' , "LATITUD" , "LONGITUD"]
     res = filtrar_lista_dics_por(respuesta[0] , heads)
     print(tabulate(res , headers= "keys" , tablefmt= "grid" , maxcolwidths= 15, maxheadercolwidths= 15 ))
     print (" el tiempo es " + str(respuesta[1]))
