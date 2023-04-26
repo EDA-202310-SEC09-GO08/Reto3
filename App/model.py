@@ -621,8 +621,8 @@ def req_7(data_structs, mes , anio ):
         min_max = aux_mas_menos(data_structs , hora_i , hora_f)
         if min_max != None:
             menos = min_max[0]
-            mas = min_max[1]
             lt.addLast(respuesta , menos)
+            mas = min_max[1]
             lt.addLast(respuesta , mas)
         i += 1
     return respuesta

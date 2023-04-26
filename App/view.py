@@ -285,28 +285,24 @@ def print_req_7(control):
     res = filtrar_lista_dics_por(respuesta[0] , heads)
     print("Accidentes más temprano y tardios para el mes de " + mes + " de " + anio)
     tamanio = len(res)
-    i = 1
-    while i <= tamanio:
+    print(res)
+    i = 0
+    while i + 1 <= tamanio:
         imprimir = []
         dia = res[i]
         fecha_entera = dia["FECHA_HORA_ACC"]
         fecha = fecha_entera[0:10]
-        dia_s = res[i]
+        dia_s = res[i + 1]
         fecha_entera_s = dia["FECHA_HORA_ACC"]
         fecha_s = fecha_entera_s[0:10]
         imprimir.append(dia)
         #lt.addLast(imprimir , dia)
-        if fecha == fecha_s:
-            imprimir.append(dia_s)
+        imprimir.append(dia_s)
             #lt.addLast(imprimir , dia_s)
-            print("Accidentes del día " + fecha)
-            print(tabulate(imprimir , headers="keys" , tablefmt= "grid" , maxcolwidths= 15, maxheadercolwidths= 15 ))
+        print("Accidentes del día " + fecha)
+        print(tabulate(imprimir , headers="keys" , tablefmt= "grid" , maxcolwidths= 15, maxheadercolwidths= 15 ))
             #print(imprimir)
-            i += 2
-        else:
-            print("Accidentes del día " + fecha)
-            print(tabulate(imprimir , headers= "keys", tablefmt= "grid" , maxcolwidths= 15, maxheadercolwidths= 15 ))
-            i += 1 
+        i += 2
     print("el tiempo " + str(respuesta[1]))
 
 
