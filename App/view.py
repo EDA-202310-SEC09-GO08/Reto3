@@ -296,7 +296,8 @@ def print_req_7(control):
         if fecha == fecha_s:
             lt.addLast(imprimir , dia_s)
             print("Accidentes del día " + fecha)
-            print(tabulate(imprimir , headers= "keys", tablefmt= "grid" , maxcolwidths= 15, maxheadercolwidths= 15 ))
+            #print(tabulate(imprimir , headers= "keys", tablefmt= "grid" , maxcolwidths= 15, maxheadercolwidths= 15 ))
+            print(imprimir)
             i += 2
         else:
             print("Accidentes del día " + fecha)

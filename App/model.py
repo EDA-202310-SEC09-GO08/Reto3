@@ -571,9 +571,12 @@ def aux_mas_menos (data_structs, hora_i, hora_f):
 #funcion que saca el accidente mas temprano y mas tarde en el intervalo
     fechas = organizar_rango_fechas_mas_reciente( data_structs, hora_i, hora_f)
     tam = lt.size(fechas)
-    menor = lt.getElement(fechas, (tam-1))
-    mayor = lt.getElement(fechas,1)
-    return menor, mayor
+    if tam > 0 :
+        menor = lt.getElement(fechas, tam)
+        mayor = lt.getElement(fechas,1)
+        return menor, mayor
+    else:
+        return None
 
 
 
@@ -586,17 +589,18 @@ def req_7(data_structs, mes , anio ):
     res_m = aux_mes(mes)
     dias = lt.getElement(res_m, 0)
     mes_res = lt.getElement(res_m , 1)
-    hora_0 = "00:00:00"
-    hora_23 = "23:59:59"    
     i = 1
     while i <= dias:
-        hora_i = aux_formato(anio , mes_res , i , hora_0)
-        hora_f = aux_formato(anio , mes_res , i , hora_23)
+        dia = str(i)
+        mes_d = str(mes_res)
+        hora_i = str(anio + "/" + mes_d + "/" + dia)
+        hora_f = str(anio + "/" + mes_d + "/" + dia)
         min_max = aux_mas_menos(data_structs , hora_i , hora_f)
-        menos = min_max[0]
-        mas = min_max[1]
-        lt.addLast(respuesta , menos)
-        lt.addLast(respuesta , mas)
+        if min_max != None:
+            menos = min_max[0]
+            mas = min_max[1]
+            lt.addLast(respuesta , menos)
+            lt.addLast(respuesta , mas)
         i += 1
     return respuesta
         
