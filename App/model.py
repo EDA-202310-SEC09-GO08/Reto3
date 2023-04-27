@@ -391,8 +391,8 @@ def req_3(data_structs , clase , calle):
     Función que soluciona el requerimiento 3
     """
     # TODO: Realizar el requerimiento 3
-    fecha_1 = "2005"
-    fecha_2 = "2025"
+    fecha_1 = "2020"
+    fecha_2 = "2024"
     fechas = organizar_rango_fechas_mas_reciente(data_structs, fecha_1 , fecha_2)
     tam = lt.size(fechas)
     num = 1

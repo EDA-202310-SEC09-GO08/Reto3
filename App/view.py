@@ -210,7 +210,7 @@ def print_req_3(control):
     heads = ["CODIGO_ACCIDENTE" , "FECHA_HORA_ACC" , "DIA_OCURRENCIA_ACC" , "LOCALIDAD" , "DIRECCION" , "GRAVEDAD" , "CLASE_ACC" , "LATITUD" , "LONGITUD"]
     res = filtrar_lista_dics_por(respuesta[0], heads)
     print("\n Hay " + str(len(res)) + " accidedentes de la clase " + clase + " occuridos a lo largo de la vía " +  calle + " y  los tres mas recientes son: ")
-    print(tabulate(res , headers= "keys" , tablefmt= "grid" , maxcolwidths=15, maxheadercolwidths=15))
+    print(tabulate( res , headers= "keys" , tablefmt= "grid" , maxcolwidths=15 , maxheadercolwidths=15 ))
     print("El tiempo es " + str(respuesta[1]))
     
 
